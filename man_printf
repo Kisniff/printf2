@@ -1,0 +1,97 @@
+--- SOMMAIRE ---
+
+-- TIPS --
+-- LES CONVERTIONS --
+-- LES FLAGS signes --
+-- LES FLAGS lettres sataniques --
+-- VALEURS DE RETOUR unicode --
+
+-- TIPS --
+Une fonction par convertion
+
+-- LES CONVERTIONS --
+Le symbole de convertion est toujours le dernier a etre interprete apres le %
+
+o -> base 8 non signee
+
+x -> base 16 minuscule non signee
+
+X -> base 16 majuscule non signee
+
+o -> base 16 comme %#x ou %#lx
+
+u -> unsigned int
+	priorite a la precision, puis a la largeur de champ minimum
+
+d, i -> agr int en chiffre decimal signe
+PRECISION -> nombre minimal de chiffre qui doivent apparaitre, si la convertion donne moins de chiffre, on écrit des 0 a gauche du chiffre
+0 precision 0 = 0
+
+c -> unsigned char
+MODIFICATEUR l -> argument de type w_int convertit en sequence multi octet par un appel a wcrtomb -> affiche une chainemulti-octet
+j'ai rien compris, cf wcrtomb
+
+C -> synonyme de lc
+
+s-> argument de type const char str, caracteres ecrits jusau'a l'octet nul  
+	PRECISION -> seul ce nombre de caracteres est ecrit, si la precision est superieure a la longueur de la chaine, le \0 est necessaire (??)
+	MODIFICATEUR l -> argument wchar_t suppose est un pointeur vers un tableau de caracteres larges
+	PRECISION -> pas plus d'ecotet ecrit que la precision indiquee, mais aucun acratcere octal ne doit etre partiellement ecrit (precision = nombre d'octet et non pas nombre de signes)
+
+S -> synonyme de ls
+
+%% -> pas de convertion : on ecrit un % normal
+
+
+	-- LES FLAGS signes --
+
+!! s'il y a plusieurs flags identiques -> printf s'en bat les couilles et n'en applique qu'un 
+!! s'il y a plusieurs flags printf les prend tous en compte (sauf override precise plus bas)
+
+# -> specifie que la valeur doit etre affichee sous une autre forme, n'a aucune incidence sur c, u, d et s (ni b)
+#o -> rajoute un 0
+#(x/X) -> rajoute un 0(x/X)
+	pour les bonus, rechecker cette regle
+
+- ->  rejoute des espaces a la fin
+	prevaut sur la taille minimmum (width)
+
++ -> il doit toujours y avoir un signe avant le nombre pour les convertions signées
+
+' ' -> l'espace precise qu'un espace blanc doit toujours etre laisse devant un nombre positif sil est signé
+	FLAG + -> prevaut sur le space
+
+0 -> comme - mais avec des 0
+	FLAG - -> prevaut sur 0
+
+precision .[nombre] -> donne le nombre minimum de chiffre a afficher pour d, i, o, u, x et X
+	-> donne le nombre maximum de caracteres a afficher pour s 
+	si le nombre est oublie, la precision est de 0
+	si le nombre est superieur a int, il va boucler la valeur de la precision tout simplement (en gros la fonction qui soccupe de ca prend un int en parametres)
+	s'il y a un #, il n'affecte pas la précision
+
+taille minimum -> si la valeur convertie a moins de caracteres que la taille minimum, on ajoute des espaces a gauche
+	LEFT ADJUSTMENT FLAG -> les espaces sont ajoutés a droite (cas que lon ne gere pas je crois )
+
+pour les chiffres si on a une precision et une traille min (width) on commence par ajouter les 0 et width = width - (convertion + precision)
+
+
+-- LES FLAGS lettres sataniques --
+aussi appeles modificateurs de longueur  //et si on gearit ces couilles des le depart ?
+
+Modifier          d, i           o, u, x, X            n
+hh                signed char    unsigned char         signed char *
+h                 short          unsigned short        short *
+l (ell)           long           unsigned long         long *
+ll (ell ell)      long long      unsigned long long    long long *
+j                 intmax_t       uintmax_t             intmax_t *
+z                 size_t         size_t                (see note)
+
+z -> pour d ou i indique que l'argument est de type non signé en taille
+	voir man pour le bonus n
+
+-- VALEURS DE RETOUR unicode --
+de 0 a 127 compris -> 2
+de 128 a 2047 compris -> 3
+de 2048 a 55295 compris -> 4
+au-delà -> -1

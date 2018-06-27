@@ -1,0 +1,3 @@
+- uniformiser la fonction pick_x pour qu'elle gere egalement les o 
+	-> attention: le # n'est pas géré de la meme maniere
+- remplacer nos forêts de if par un tableau de pointeur sur fonctions
