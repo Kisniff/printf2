@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/28 17:36:18 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/06/28 18:33:48 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_struct(t_data *data)
 {
 	int i;
 
-	data->precision = 0;
+	data->precision = 1;
 	data->width = 0;
 	i = -1;
 	while (++i <= 4)
@@ -71,13 +71,14 @@ int	 ft_printf(const char *str, ...)
 /*
 int main(void)
 {//fix two commented codes@
+//fail 0095
 	int	i;
 	int	ret;
 
 	i = -1;
 
-	printf("Vret -> %d\n", printf("vous - @moulitest: %.x %.0x\n", 0, 0));
-	printf("Nret -> %d\n", ft_printf("nous - @moulitest: %.x %?*.0x\n", 0, 0));
+	printf("Vret -> %d\n", printf("vous - @moulitest: %#.o %#.0o\n", 0, 0));
+	printf("Nret -> %d\n", ft_printf("nous - @moulitest: %#.o %#.0o\n", 0, 0));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);

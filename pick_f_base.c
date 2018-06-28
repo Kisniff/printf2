@@ -42,31 +42,13 @@ char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 	return (result);
 }
 
-int	pick_f_x_two(char *result, t_data *data, const char *ptr)
-{
-	if (data->flags[ZERO])
-	{
-		f_x_sharp(data, ptr, result);
-		f_zero(data);
-		print_str(result, data);
-	}
-	else if (data->width > 0)
-	{
-		f_width(data);
-		f_x_sharp(data, ptr, result);
-		print_str(result, data);
-	}
-	else
-	{
-		f_x_sharp(data, ptr, result);
-		print_str(result, data);
-	}
-	return (0);
-}
-
-int	exception_zero(char *result, t_data *data)
+int	exception_zero_x(char *result, t_data *data, const char *ptr)
 {
 	data->len = 0;
+	if (data->precision == 0)
+		data->precision = ((*ptr == 'o' || *ptr == 'O') && data->flags[SHARP] > 0) ? 0 : -1;
+	if (data->precision == 0 && data->width == 0)
+		return (fill_buff_c(data, '0'));
 	if (data->precision < 0)
 	{
 		//printf("a\n");
@@ -98,6 +80,35 @@ int	exception_zero(char *result, t_data *data)
 	return (1);
 }
 
+
+int	pick_f_x_two(char *result, t_data *data, const char *ptr)
+{
+	if (data->flags[ZERO])
+	{
+		//printf("C\n");
+		f_x_sharp(data, ptr, result);
+		f_zero(data);
+		print_str(result, data);
+	}
+	else if (data->width > 0)
+	{
+		//printf("D\n");
+		f_width(data);
+		f_x_sharp(data, ptr, result);
+		print_str(result, data);
+	}
+	else
+	{
+		//printf("E\n");
+		//printf("0 buff -> %s\n", data->buff);
+		f_x_sharp(data, ptr, result);
+		//printf("1 buff -> %s\n", data->buff);
+		print_str(result, data);
+		//printf("2 buff -> %s\n", data->buff);
+	}
+	return (0);
+}
+
 int	pick_f_base(va_list param, t_data *data, const char *ptr)
 {
 	//comportement indéfini precision et largeur = int max
@@ -106,19 +117,21 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr)
 	result = determine_xo_call(ptr, param, data);
 	data->len = ft_strlen(result);
 	if (data->len == 1 && *result == '0')
-		return(exception_zero(result, data));
+		return(exception_zero_x(result, data, ptr));
 	data->len = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ? data->len + 2 : data->len;
 	data->len = (data->flags[SHARP] && (*ptr == 'o' || *ptr == 'O')) ? ++data->len : data->len;
 	data->precision = (data->precision > data->len) ? data->precision - (data->len) : 0;
 	if (data->flags[MINUS])
 	{
+		//printf("A\n");
 		f_x_sharp(data, ptr, result);
 		f_precision(data);
 		print_str(result, data);
 		f_width(data);
 	}
-	else if (data->precision > 0 && data->width > 0)
+	else if (data->precision > 0)
 	{
+		//printf("B\n");
 		f_width(data);
 		f_x_sharp(data, ptr, result);
 		f_precision(data);
