@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:13:59 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/23 17:05:04 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/06/28 14:45:59 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,13 @@ int	fill_buff_s(t_data *data, int i, char *str)
 
 	j = -1;
 	if (i == -1)
-	{
 		write(1, &data->buff, data->idx);
-	}
 	else if (i + data->idx <= BUFF_SIZE)
-	{
 		while (--i >= 0 && str[++j])
 		{
 			data->buff[++data->idx] = str[j];
 			++data->ret_val;
 		}
-	}
 	else if (i + data->idx > BUFF_SIZE)
 	{
 		write(1, &data->buff, BUFF_SIZE);
@@ -81,8 +77,9 @@ int	print_str(char *str, t_data *data)
 {//un putstr qui incrémente notre valeur de retour
 	int	i;
 
-	i = ft_strlen(str);
-	fill_buff_s(data, i, str);
+	i = -1;
+	while (str[++i])
+		fill_buff_c(data, str[i]);
 	return (data->ret_val);
 }
 

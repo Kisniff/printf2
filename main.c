@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/23 18:45:46 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:21:35 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int main(void)
 
 	i = -1;
 
-	printf("Vret -> %d\n", printf("vous %llu\n", 4999999999));
-	printf("Nret -> %d\n", ft_printf("nous %llu\n", 4999999999));
+	printf("Vret -> %d\n", printf("%x", -42));
+	printf("Nret -> %d\n", ft_printf("%x", -42));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);

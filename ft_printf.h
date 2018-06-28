@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/23 17:06:02 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/06/28 13:37:05 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	check_ox(t_data *data);
 int	check_u(t_data *data);
 int	fill_buff_s(t_data *data, int i, char *str);
 int	fill_buff_c(t_data *data, char c);
+int	ft_printf(const char *str, ...);
 
 
 #endif

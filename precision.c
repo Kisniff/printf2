@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 15:13:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/19 14:23:20 by sklepper         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:02:59 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int		precision(const char *ptr, t_data *data)
 	i = 0;
 	while (*(ptr + i) >= '0' && *(ptr + i) <= '9')
 		i++;
-	if (i > 0)
+	if ((i == 1 && *ptr == '0') || i == 0)
+		data->precision = -1;
+	else if (i > 0)
 		data->precision = ft_atoi(ptr);
-	else
-		data->precision = 1;
 	return (i);
 }
 
