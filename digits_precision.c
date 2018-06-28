@@ -26,8 +26,10 @@ int	f_zero(t_data *data)
 int	f_width(t_data *data)
 {
 	int	width;
+	int	precision;
 
-	width = (int)(data->width - (data->len + data->precision));
+	precision = (data->precision > 0) ? data->precision : 0 ;
+	width = (int)(data->width - (data->len + precision));
 	if (width > 0)
 		while (--width >= 0)
 			fill_buff_c(data, ' ');

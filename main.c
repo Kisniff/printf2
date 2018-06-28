@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/28 17:21:35 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:36:18 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_struct(t_data *data)
 
 	data->precision = 0;
 	data->width = 0;
-	data->ret_val = 0;
 	i = -1;
 	while (++i <= 4)
 		data->flags[i] = 0;
@@ -52,6 +51,7 @@ int	 ft_printf(const char *str, ...)
 //	if (check(str) == -1)
 //		return (-1);
 	init_struct(&data);
+	data.ret_val = 0;
 	data.idx = -1;
 	while ((ptr = ft_strchr(str, '%')) != NULL)
 	{
@@ -59,9 +59,7 @@ int	 ft_printf(const char *str, ...)
 		printuntil(str, ptr, &data);
 		ptr += 1;
 		while (ptr && (i = path(ptr, pointerlst, &data)) > 0)
-		{
 			ptr += i;
-		}
 		str = ptr + 1;
 	}
 //	fill_buff_s(&data, -1, "");
@@ -70,7 +68,7 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-
+/*
 int main(void)
 {//fix two commented codes@
 	int	i;
@@ -78,9 +76,9 @@ int main(void)
 
 	i = -1;
 
-	printf("Vret -> %d\n", printf("%x", -42));
-	printf("Nret -> %d\n", ft_printf("%x", -42));
+	printf("Vret -> %d\n", printf("vous - @moulitest: %.x %.0x\n", 0, 0));
+	printf("Nret -> %d\n", ft_printf("nous - @moulitest: %.x %?*.0x\n", 0, 0));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);
-}
+}*/

@@ -67,10 +67,10 @@ int	pick_f_x_two(char *result, t_data *data, const char *ptr)
 int	exception_zero(char *result, t_data *data)
 {
 	data->len = 0;
-	//printf("data->precision -> %d\n", data->precision);
 	if (data->precision < 0)
 	{
 		//printf("a\n");
+		f_width(data);
 		return (0);
 	}
 	if (data->precision > 0)
