@@ -128,11 +128,15 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr)
 
 	result = determine_xo_call(ptr, param, data);
 	data->len = ft_strlen(result);
+	//printf("result -> %s\n", result);
+	//printf("data->len-> %d\n", data->len);
 	if (data->len == 1 && *result == '0')
 		return(exception_zero_x(result, data, ptr));
-	data->len = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ? data->len + 2 : data->len;
+	data->width = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ? data->width - 2 : data->width;
 	data->len = (data->flags[SHARP] && (*ptr == 'o' || *ptr == 'O')) ? ++data->len : data->len;
-	data->precision = (data->precision > data->len) ? data->precision - (data->len) : 0;
+	//printf("data->precision-> %d\n", data->precision);
+	data->precision = (data->precision > data->len) ? data->precision - data->len : 0;
+	//printf("data->precision-> %d\n", data->precision);
 	if (data->flags[MINUS])
 	{
 		//printf("A\n");

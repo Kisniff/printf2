@@ -36,7 +36,7 @@ $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ) 
 
 yo: 	$(OBJ)
-	@gcc $(FLAGS) -o $(NAMEN)  $(OBJ) -lft -L./libft/.
+	@gcc $(FLAGS) -fsanitize=address -g -o $(NAMEN)  $(OBJ) -lft -L./libft/.
 	@rm -f $(OBJ)
 
 clean:

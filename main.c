@@ -76,8 +76,8 @@ int main(void)
 
 	i = -1;
 
-	printf("Vret -> %d\n", printf("vous %lu\n", -42));
-	printf("Nret -> %d\n", ft_printf("nous %lu\n", -42));
+	printf("Vret -> %d\n", printf("vous %#.22zx\n", 0xff1144ff1144));
+	printf("Nret -> %d\n", ft_printf("nous %#.22zx\n", 0xff1144ff1144));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);

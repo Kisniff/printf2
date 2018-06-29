@@ -41,7 +41,7 @@ static int			exception_zero_u(t_data *data)
 {
 	data->len = 0;
 	if (data->precision == 0 && data->width == 0)
-		return (fill_buff_c(data, ""));
+		return (fill_buff_c(data, 0));
 	if (data->precision < 0)
 	{
 		//printf("a\n");
