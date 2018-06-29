@@ -41,7 +41,7 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 		tmp = (uintmax_t)va_arg(param, size_t);
 	else
 	{
-		tmp = va_arg(param, unsigned long);
+		tmp = va_arg(param, unsigned int);
 		if (tmp > 4294967295)
 			tmp = (4294967296 - tmp) * -1;
 	}
