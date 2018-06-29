@@ -12,6 +12,7 @@ int	pick_f_c(va_list param, t_data *data)
 
 	result = va_arg(param, int);
 	data->len = 1;
+	data->precision = 0;
 	if (data->flags[MINUS])
 	{
 		print_char(result, data);

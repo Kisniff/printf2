@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pick_f_base.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/06/29 12:39:24 by jlehideu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "ft_printf.h"
 
-int	f_x_sharp(t_data *data, const char *ptr, char *result)
+static int	f_x_sharp(t_data *data, const char *ptr, char *result)
 {
 	if (data->flags[SHARP] > 0 && *ptr == 'x')
 		print_str("0x", data);
@@ -12,7 +24,7 @@ int	f_x_sharp(t_data *data, const char *ptr, char *result)
 	return (0);
 }
 
-char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
+static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 {
 	char		*result;
 	uintmax_t	tmp;
@@ -42,7 +54,7 @@ char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 	return (result);
 }
 
-int	exception_zero_x(char *result, t_data *data, const char *ptr)
+static int	exception_zero_x(char *result, t_data *data, const char *ptr)
 {
 	data->len = 0;
 	if (data->precision == 0)
