@@ -39,11 +39,6 @@ static int			exception_zero_u(t_data *data)
 {
 	data->len = 0;
 	//printf("data->precision %d\n", data->precision);
-	if (data->precision == 0 && data->width == 0)
-	{
-		//printf("A\n");
-		return (1);
-	}
 	if (data->precision < 0)
 	{
 		//printf("a\n");
@@ -59,7 +54,6 @@ static int			exception_zero_u(t_data *data)
 	else if (data->flags[ZERO])
 	{
 		//printf("c\n");
-		f_width(data);
 		f_zero(data);
 	}
 	else if (data->width > 0)
@@ -97,6 +91,7 @@ static uintmax_t	retrieve_u_param(t_data *data, va_list param)
 int	pick_f_u(va_list param, t_data *data, const char *ptr)
 {
 	uintmax_t	nb;
+	int		prec;
 
 	nb = retrieve_u_param(data, param);;
 	//printf("nb -> %d\n", nb);
@@ -108,16 +103,19 @@ int	pick_f_u(va_list param, t_data *data, const char *ptr)
 		//printf("exception\n");
 		return (exception_zero_u(data));
 	}
+	prec = data->precision;
 	data->precision = (data->precision > data->len) ? data->precision - data->len : 0;
 	//printf("data->precision -> %d\n", data->precision);
 	if (data->flags[MINUS])
 	{	
+		//printf("A\n");
 		f_precision(data);
 		ft_put_u(nb, data);
 		f_width(data);
 	}
 	else if (data->precision > 0)
 	{
+		//printf("B\n");
 		//printf("precision -> %d\n", data->precision);
 		f_width(data);
 		f_precision(data);
@@ -125,11 +123,19 @@ int	pick_f_u(va_list param, t_data *data, const char *ptr)
 	}
 	else if (data->flags[ZERO])
 	{ 
-		f_zero(data);
+		//printf("C\n");
+		if (prec <= 0)
+		{
+			//printf("prec -> %d\n");
+			f_zero(data);
+		}
+		else
+			f_width(data);
 		ft_put_u(nb, data);
 	}
 	else if (data->width > 0)
 	{
+		//printf("D\n");
 		f_width(data);
 		ft_put_u(nb, data);
 	}

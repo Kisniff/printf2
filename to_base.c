@@ -14,6 +14,15 @@ char	*ft_swap_chars(char *str)
 	return (str);
 }
 
+char *base_exception(uintmax_t nb, char *base)
+{
+	if (!base)
+		return (NULL);
+	if (nb == 0)
+		return (ft_strdup("0"));
+	return (NULL);
+}
+
 char	*to_base(uintmax_t nb, char *base)
 {
 	intmax_t	i;
@@ -21,8 +30,9 @@ char	*to_base(uintmax_t nb, char *base)
 	uintmax_t	tmp;
 	char		*result;
 
-	if (!base)
-		return (NULL);
+	//printf("nb-> %d\n");
+	if (!base || nb == 0)
+		return (base_exception(nb, base));
 	prod = (ft_strcmp(base, BASE_O) == 0) ? 8 : 16;
 	i = (nb < prod)? 1 : 0;
 	tmp = nb;

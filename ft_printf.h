@@ -93,6 +93,7 @@ int	check_u(t_data *data);
 int	fill_buff_s(t_data *data, int i, char *str);
 int	fill_buff_c(t_data *data, char c);
 int	ft_printf(const char *str, ...);
+char	*ft_strnew(size_t size);
 
 
 #endif

@@ -1,3 +1,7 @@
 - remplacer nos forêts de if par un tableau de pointeur sur fonctions
 - !! - trouver l'intervale d'unicode que printf ne gere pas
 - bzero la structure au lieu de la fonction init pour eviter des couilles a l'avenir
+- verifier s'il faut rajouter une condition dans les data->flags[ZERO] de tous les digits :
+	si on me donne une précision > 0 mais < size, le vrai printf imprime quoi avec le flag 0 ? et nous ?
+
+!!!!! -> dans precision() j'ai rajouté une ligne qui annule flags[zero] si on rentre dedans

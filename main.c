@@ -30,7 +30,8 @@ void	init_struct(t_data *data)
 {
 	int i;
 
-	data->precision = 1;
+	data->precision = 0;
+	//modifier la data precision
 	data->width = 0;
 	i = -1;
 	while (++i <= 4)
@@ -76,9 +77,9 @@ int main(void)
 
 	i = -1;
 
-	printf("Vret -> %d\n", printf("vous \ntoto et %00009U\n", 0));
-	printf("Nret -> %d\n", ft_printf("nous \ntoto et %00009U\n", 0));
-//	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
-//	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
+	printf("Vret -> %d\n", printf("vous > toto %###.0o", 0));
+	printf("Nret -> %d\n", ft_printf("nous > toto %###.0o", 0));
+	//printf("Vret -> %d\n", printf("vous %u\n", 0));
+//	printf("Nret -> %d\n", ft_printf("nous %u\n", 0));
 	return (0);
 }
