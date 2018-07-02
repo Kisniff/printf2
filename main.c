@@ -67,7 +67,7 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-/*
+
 int main(void)
 {//fix two commented codes@
 //fail 0095
@@ -76,9 +76,9 @@ int main(void)
 
 	i = -1;
 
-	printf("Vret -> %d\n", printf("vous %#.22zx\n", 0xff1144ff1144));
-	printf("Nret -> %d\n", ft_printf("nous %#.22zx\n", 0xff1144ff1144));
+	printf("Vret -> %d\n", printf("vous \ntoto et %00009U\n", 0));
+	printf("Nret -> %d\n", ft_printf("nous \ntoto et %00009U\n", 0));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);
-}*/
+}

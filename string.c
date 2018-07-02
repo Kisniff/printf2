@@ -43,7 +43,7 @@ int	fill_buff_c(t_data *data, char c)
 		data->buff[++data->idx] = c;
 		++data->ret_val;
 	}
-	else if (1 + data->idx > BUFF_SIZE)
+	else if (1 + data->idx > BUFF_SIZE) 
 	{
 		write(1, &data->buff, BUFF_SIZE);
 		data->idx = 0;

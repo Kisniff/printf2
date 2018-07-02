@@ -41,7 +41,7 @@ struct s_data
 	int		width;
 	int		zero;
 	int		ret_val;
-	int		len;
+	uintmax_t	len;
 	int		idx;
 };
 
