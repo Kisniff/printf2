@@ -1,6 +1,12 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
+//sharp has no effect
+//precision no effect
+//plus no effect
+//
+//WIDTH
+//MINUS
 void	write_quadruple(wchar_t unicode, t_data *data)
 {
 	char *str;
@@ -46,12 +52,27 @@ void	write_double(wchar_t unicode, t_data *data)
 	ft_strdel(&str);
 }
 
+void	determine_w_len(t_data *data, wchar_t unicode)
+{
+	if (unicode < 129)
+		data->len = 1;
+	else if (unicode < 2049)
+		data->len = 2;
+	else if (unicode < 55295)
+		data->len = 3;
+	else if (unicode < 2097152)
+		data->len = 4;
+}
+
 int	pick_f_w(t_data *data, va_list param)
 {
 	wchar_t unicode;
 	
-	if((unicode = va_arg(param, wchar_t)) < 0)
+	if((unicode = va_arg(param, wchar_t)) < 0 || unicode > 2097152)
 		return(data->ret_val = -1);
+	determine_w_len(data, unicode);
+	if (data->flags[MINUS] == 0 && data->width > 0)
+		f_width(data);
 	if (unicode < 129)
 	{
 		fill_buff_c(data, unicode);
@@ -66,7 +87,7 @@ int	pick_f_w(t_data *data, va_list param)
 	}
 	else if (unicode < 2097152)
 		write_quadruple(unicode, data);
-	else
-		data->ret_val = -1;
+	if (data->flags[MINUS] > 0)
+		f_width(data);
 	return (0);
 }
