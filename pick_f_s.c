@@ -51,8 +51,9 @@ int	pick_f_s(va_list param, t_data *data, char *ptr)
 		print_str("(null)\0", data, ptr);
 		return (0);
 	}
+	//printf("data->precision %d\n", data->precision);
 	data->len = (data->precision < 0) ? 0 : ft_strlen(str);
-	data->len = (data->precision < data->len) ? data->precision : data->len;
+	data->len = (data->precision > 0 && data->precision < data->len) ? data->precision : data->len;
 	//printf("str -> %s\n", str);
 	data->precision = 0;
 	//printf("data->len = %zu\n", data->len);

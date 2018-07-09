@@ -39,10 +39,7 @@ int	print_str(char *str, t_data *data, char *ptr)
 	i = -1;
 	if (*ptr == 's' || *ptr == 'S')
 		while (str[++i] && i < data->len)
-		{
 			fill_buff_c(data, str[i]);
-			printf("str -> %c\n", str[i]);
-		}
 	else
 		while (str[++i])
 			fill_buff_c(data, str[i]);
