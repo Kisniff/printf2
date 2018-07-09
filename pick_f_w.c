@@ -50,7 +50,8 @@ int	pick_f_w(t_data *data, va_list param)
 {
 	wchar_t unicode;
 	
-	unicode = va_arg(param, wchar_t);
+	if((unicode = va_arg(param, wchar_t)) < 0)
+		return(data->ret_val = -1);
 	if (unicode < 129)
 	{
 		fill_buff_c(data, unicode);
@@ -64,9 +65,7 @@ int	pick_f_w(t_data *data, va_list param)
 		write_triple(unicode, data);
 	}
 	else if (unicode < 2097152)
-	{
 		write_quadruple(unicode, data);
-	}
 	else
 		data->ret_val = -1;
 	return (0);

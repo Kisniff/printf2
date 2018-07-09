@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 11:16:42 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 14:15:51 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,26 @@ uintmax_t	len_u(uintmax_t nb)
 static int			exception_zero_u(t_data *data)
 {
 	data->len = 0;
-<<<<<<< HEAD
 	if (data->precision == 0 && data->width == 0)
-		return (fill_buff_c(data, 0));
+	{
+		//printf("all to 0\n");
+		return (fill_buff_c(data, '0'));
+	}
 	if (data->precision < 0)
 	{
-	//	printf("a\n");
+		//printf("a\n");
 		f_width(data);
 		return (0);
 	}
 	if (data->precision > 0)
 	{
-	//	printf("b\n");
+		//printf("b\n");
 		f_width(data);
 		f_precision(data);
 	}
 	else if (data->flags[ZERO])
 	{
-	//	printf("c\n");
+		//printf("c\n");
 		f_zero(data);
 	}
 	else if (data->width > 0)
@@ -81,12 +83,15 @@ static uintmax_t	retrieve_u_param(t_data *data, va_list param)
 		//printf("ll\n");
 		return (va_arg(param, unsigned long long));
 	}
-	else if (data->length[H] > 0)
-		return (va_arg(param, int));
+	else if (data->length[H] == 1)
+		return (va_arg(param, unsigned short));
+	else if (data->length[H] == 2)
+		return (va_arg(param, unsigned char));
 	else if (data->length[J] == 1)
 		return (va_arg(param, uintmax_t));
 	else if (data->length[Z] == 1)
 		return (va_arg(param, size_t));
+	//printf("ELSE\n");
 	return (va_arg(param, unsigned int));
 }
 
@@ -96,9 +101,9 @@ int	pick_f_u(va_list param, t_data *data, const char *ptr)
 	int		prec;
 
 	nb = retrieve_u_param(data, param);;
-	//printf("nb -> %d\n", nb);
 	data->len = len_u(nb);
-	//printf("data->len %d\nnb -> %zu\n", data->len, nb);
+	//printf("nb -> %u\n", nb);
+	//printf("data->len %zu\nnb -> %zu\n", data->len, nb);
 	//printf("data->precision -> %d\n", data->precision);
 	if (data->len == 1 && nb == 0)
 	{
@@ -128,7 +133,7 @@ int	pick_f_u(va_list param, t_data *data, const char *ptr)
 		//printf("C\n");
 		if (prec <= 0)
 		{
-			//printf("prec -> %d\n");
+			//printf("prec -> %d\n", data->precision);
 			f_zero(data);
 		}
 		else

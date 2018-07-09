@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 10:22:50 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 14:57:48 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,52 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 	char		*result;
 	uintmax_t	tmp;
 
-	if (data->length[H] > 0)
-		tmp = (uintmax_t)va_arg(param, int);
-	else if (data->length[L] == 1)
-		tmp = (uintmax_t)va_arg(param, unsigned long);
-	else if (data->length[L] == 2)
-		tmp = (uintmax_t)va_arg(param, unsigned long long);
-	else if (data->length[J] == 1)
-		tmp = va_arg(param, uintmax_t);
-	else if (data->length[Z] == 1)
-		tmp = (uintmax_t)va_arg(param, size_t);
-	else
+	if (data->length[H] == 2)
 	{
+		//printf("hh\n");
+		tmp = (uintmax_t)va_arg(param, unsigned char);
+	}
+	else if (data->length[H] == 1)
+	{
+		//printf("h\n");
+		tmp = (uintmax_t)va_arg(param, unsigned short);
+	}
+	else if (data->length[L] == 1)
+	{
+		//printf("l\n");
+		tmp = (uintmax_t)va_arg(param, unsigned long);
+	}
+	else if (data->length[L] == 2)
+	{
+		//printf("ll\n");
+		tmp = (uintmax_t)va_arg(param, unsigned long long);
+	}
+	else if (data->length[J] == 1)
+	{
+		//printf("j\n");
+		tmp = va_arg(param, uintmax_t);
+	}
+	else if (data->length[Z] == 1)
+	{
+		//printf("z\n");
+		tmp = (uintmax_t)va_arg(param, size_t);
+	}
+	else if (*ptr == 'x' || *ptr == 'X')
+	{
+		//printf("else x\n");
 		tmp = va_arg(param, unsigned int);
 		if (tmp > 4294967295)
 			tmp = (4294967296 - tmp) * -1;
+	}
+	else if (*ptr == 'o')
+	{
+		//printf("else o\n");
+		tmp = va_arg(param, unsigned int);
+	}
+	else if (*ptr == 'O')
+	{
+		//printf("else O\n");
+		tmp = va_arg(param, uintmax_t);
 	}
 	if (*ptr == 'x')
 		result = to_base(tmp, BASE_H);
@@ -57,15 +88,18 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 static int	exception_zero_x(char *result, t_data *data, const char *ptr)
 {
 	data->len = 0;
+	//printf("EXCEPTION \n");
 	//printf("data->precision EO -> %d\n", data->precision);
 	//printf("data->widthEO -> %d\n", data->width);
 	//printf("data-> sharp EO -> %d\n", data->flags[SHARP]);
+	data->flags[SHARP] = (data->flags[ZERO] > 0) ? 0 : data->flags[SHARP];
 	if (data->precision == 0 && data->width <= 1 && data->flags[SHARP] == 0)
 		return (fill_buff_c(data, '0'));
-	if (data->precision == 0)
-		data->precision = ((*ptr == 'o' || *ptr == 'O') && data->flags[SHARP] > 0) ? 1 : -1;
+	if (data->precision <= 0 && (*ptr == 'o' || *ptr == 'O'))
+		data->precision = (data->flags[SHARP] > 0) ? 1 : -1;
 	if (data->flags[MINUS] > 0)
 	{
+		//printf("a\n");
 		f_precision(data);
 		f_width(data);
 		return (0);
@@ -91,6 +125,7 @@ static int	exception_zero_x(char *result, t_data *data, const char *ptr)
 		//printf("e\n");
 		return (fill_buff_c(data, '0'));
 	}
+	//printf("ELSE\n");
 	return (1);
 }
 
@@ -131,13 +166,14 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr)
 	result = determine_xo_call(ptr, param, data);
 	//printf("result -> %s\n", result);
 	data->len = (result != NULL) ? ft_strlen(result) : 0;
-	//printf("data->len-> %d\n", data->len);
+	//printf("data->len-> %zu\n", data->len);
 	if (data->len == 1 && *result == '0')
 		return(exception_zero_x(result, data, ptr));
 	data->width = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ? data->width - 2 : data->width;
 	data->len = (data->flags[SHARP] && (*ptr == 'o' || *ptr == 'O')) ? ++data->len : data->len;
 	//printf("1 data->precision-> %d\n", data->precision);
-	data->precision = (data->precision > data->len) ? data->precision - data->len : 0;
+	if (data->precision >= 0)
+		data->precision = (data->precision > data->len) ? data->precision - data->len : 0;
 	//printf("2 data->precision-> %d\n", data->precision);
 	if (data->flags[MINUS])
 	{

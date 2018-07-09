@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/09 11:17:05 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 15:28:02 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <locale.h>
+#include <limits.h>
 
 int	printuntil(const char *str, const char *ptr, t_data *data)
 {
@@ -64,7 +65,8 @@ int	 ft_printf(const char *str, ...)
 		str = ptr + 1;
 	}
 	printuntil(str, ptr, &data);
-	write(1, &data.buff, ++data.idx);
+	if (data.ret_val > -1)
+		write(1, &data.buff, ++data.idx);
 	va_end(pointerlst);
 	return (data.ret_val);
 }
@@ -74,12 +76,14 @@ int main(void)
 //fail 0095
 	int	i;
 	int	ret;
+	char	*test;
 
-	i = -1;
-
+	i = 1179647;
+	test = NULL;
 	setlocale(LC_ALL, "");
-	printf("Vret -> %d\n", printf("vous %lc\n", L'Ĕ'));
-	printf("Nret -> %d\n", ft_printf("nous %lc\n", L'Ĕ'));
+	printf("%d\n", i);
+	printf("Vret -> %d\n", printf("vous %C", 0xbffe));
+	printf("Nret -> %d\n", ft_printf("nous %C", 0xbffe));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);
