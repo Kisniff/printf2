@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/06/29 12:39:24 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 10:22:50 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 		tmp = (uintmax_t)va_arg(param, size_t);
 	else
 	{
-		tmp = va_arg(param, unsigned long);
+		tmp = va_arg(param, unsigned int);
 		if (tmp > 4294967295)
 			tmp = (4294967296 - tmp) * -1;
 	}

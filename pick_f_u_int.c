@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/06/29 12:52:06 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 10:21:42 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,33 @@ static int			exception_zero_u(t_data *data)
 {
 	data->len = 0;
 	if (data->precision == 0 && data->width == 0)
-		return (fill_buff_c(data, ''));
+		return (fill_buff_c(data, 0));
 	if (data->precision < 0)
 	{
-		printf("a\n");
+	//	printf("a\n");
 		f_width(data);
 		return (0);
 	}
 	if (data->precision > 0)
 	{
-		printf("b\n");
+	//	printf("b\n");
 		f_width(data);
 		f_precision(data);
 	}
 	else if (data->flags[ZERO])
 	{
-		printf("c\n");
+	//	printf("c\n");
 		f_width(data);
 		f_zero(data);
 	}
 	else if (data->width > 0)
 	{
-		printf("d\n");
+	//	printf("d\n");
 		f_width(data);
 	}
 	else
 	{
-		printf("e\n");
+	//	printf("e\n");
 		return (fill_buff_c(data, '0'));
 	}
 	return (1);
@@ -94,10 +94,10 @@ int	pick_f_u(va_list param, t_data *data, const char *ptr)
 
 	nb = retrieve_u_param(data, param);;
 	data->len = len_u(nb);
-	printf("data->len %d\nnb -> %zu\n", data->len, nb);
+	//printf("data->len %d\nnb -> %zu\n", data->len, nb);
 	if (data->len == 1 && nb == 0)
 	{
-		printf("exception\n");
+	//	printf("exception\n");
 		return (exception_zero_u(data));
 	}
 	data->precision = (data->precision > data->len) ? data->precision - data->len : 0;

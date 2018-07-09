@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/29 12:49:44 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 11:13:17 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-
+/*
 int main(void)
 {//fix two commented codes@
 //fail 0095
@@ -76,9 +76,10 @@ int main(void)
 
 	i = -1;
 
-	printf("Vret -> %d\n", printf("vous %.0u\n", 0));
-	printf("Nret -> %d\n", ft_printf("nous %.0u\n", 0));
+	setlocale(LC_ALL, "");
+	printf("Vret -> %d\n", printf("vous %lc\n", L'Ĕ'));
+	printf("Nret -> %d\n", ft_printf("nous %lc\n", L'Ĕ'));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);
-}
+}*/
