@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/09 11:13:17 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 11:17:05 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	init_struct(t_data *data)
 {
 	int i;
 
-	data->precision = 1;
+	data->precision = 0;
+	//modifier la data precision
 	data->width = 0;
 	i = -1;
 	while (++i <= 4)

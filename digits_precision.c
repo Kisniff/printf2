@@ -15,8 +15,10 @@ int	f_precision(t_data *data)
 int	f_zero(t_data *data)
 {
 	int	zero;
+	int	precision;
 
-	zero = (int)(data->width - (data->len + data->precision));
+	precision = (data->precision > 0) ? data->precision : 0;
+	zero = (int)(data->width - (data->len + precision));
 	if (zero > 0)
 		while(--zero >= 0)
 			fill_buff_c(data, '0');

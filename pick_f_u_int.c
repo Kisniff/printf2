@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 10:21:42 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 11:16:42 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,16 @@ static void	ft_put_u(uintmax_t nb, t_data *data)
 	fill_buff_c(data, nb % 10 + 48);
 }
 
-static size_t	len_u(unsigned int nb)
+uintmax_t	len_u(uintmax_t nb)
 {
-	size_t		len;
-	long int	prod;
+	uintmax_t	len;
 
 	len = 0;
-	prod = 1;
 	if (nb == 0)
 		return (1);
-	while (nb / prod >= 1)
+	while (nb >= 1)
 	{
-		prod *= 10;
+		nb = nb / 10;
 		++len;
 	}
 	return (len);
@@ -40,6 +38,7 @@ static size_t	len_u(unsigned int nb)
 static int			exception_zero_u(t_data *data)
 {
 	data->len = 0;
+<<<<<<< HEAD
 	if (data->precision == 0 && data->width == 0)
 		return (fill_buff_c(data, 0));
 	if (data->precision < 0)
@@ -57,17 +56,16 @@ static int			exception_zero_u(t_data *data)
 	else if (data->flags[ZERO])
 	{
 	//	printf("c\n");
-		f_width(data);
 		f_zero(data);
 	}
 	else if (data->width > 0)
 	{
-	//	printf("d\n");
+		//printf("d\n");
 		f_width(data);
 	}
 	else
 	{
-	//	printf("e\n");
+		//printf("e\n");
 		return (fill_buff_c(data, '0'));
 	}
 	return (1);
@@ -75,10 +73,14 @@ static int			exception_zero_u(t_data *data)
 
 static uintmax_t	retrieve_u_param(t_data *data, va_list param)
 {
+	//printf("retrieve\n");
 	if (data->length[L] == 1)
 		return (va_arg(param, unsigned long));
 	else if (data->length[L] == 2)
+	{
+		//printf("ll\n");
 		return (va_arg(param, unsigned long long));
+	}
 	else if (data->length[H] > 0)
 		return (va_arg(param, int));
 	else if (data->length[J] == 1)
@@ -91,41 +93,51 @@ static uintmax_t	retrieve_u_param(t_data *data, va_list param)
 int	pick_f_u(va_list param, t_data *data, const char *ptr)
 {
 	uintmax_t	nb;
+	int		prec;
 
 	nb = retrieve_u_param(data, param);;
+	//printf("nb -> %d\n", nb);
 	data->len = len_u(nb);
 	//printf("data->len %d\nnb -> %zu\n", data->len, nb);
+	//printf("data->precision -> %d\n", data->precision);
 	if (data->len == 1 && nb == 0)
 	{
-	//	printf("exception\n");
+		//printf("exception\n");
 		return (exception_zero_u(data));
 	}
+	prec = data->precision;
 	data->precision = (data->precision > data->len) ? data->precision - data->len : 0;
+	//printf("data->precision -> %d\n", data->precision);
 	if (data->flags[MINUS])
 	{	
+		//printf("A\n");
 		f_precision(data);
 		ft_put_u(nb, data);
 		f_width(data);
-	}
-	else if (data->precision > 0 && data->width > 0)
-	{
-		f_width(data);
-		f_precision(data);
-		ft_put_u(nb, data);
 	}
 	else if (data->precision > 0)
 	{
+		//printf("B\n");
+		//printf("precision -> %d\n", data->precision);
 		f_width(data);
 		f_precision(data);
 		ft_put_u(nb, data);
 	}
 	else if (data->flags[ZERO])
 	{ 
-		f_zero(data);
+		//printf("C\n");
+		if (prec <= 0)
+		{
+			//printf("prec -> %d\n");
+			f_zero(data);
+		}
+		else
+			f_width(data);
 		ft_put_u(nb, data);
 	}
 	else if (data->width > 0)
 	{
+		//printf("D\n");
 		f_width(data);
 		ft_put_u(nb, data);
 	}

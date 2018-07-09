@@ -20,10 +20,13 @@ int		precision(const char *ptr, t_data *data)
 	i = 0;
 	while (*(ptr + i) >= '0' && *(ptr + i) <= '9')
 		i++;
-	if ((i == 1 && *ptr == '0') || i == 0)
-		data->precision = 0;
+	if ((i == 1 && *ptr == '0'))
+		data->precision = -1;
 	else if (i > 0)
 		data->precision = ft_atoi(ptr);
+	else 
+		data->precision = -1;
+	data->flags[ZERO] = 0;
 	return (i);
 }
 

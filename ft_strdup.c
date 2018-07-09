@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/07 14:16:13 by sklepper          #+#    #+#             */
-/*   Updated: 2018/05/07 14:05:10 by sklepper         ###   ########.fr       */
+/*   Created: 2018/04/10 15:29:33 by sklepper          #+#    #+#             */
+/*   Updated: 2018/05/07 14:03:53 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_strnew(size_t size)
+char	*ft_strdup(char *src)
 {
-	char *new;
+	size_t		nb_char;
+	size_t		i;
+	char		*dest;
 
-	new = malloc(sizeof(char) * size + 1);
-	if (new == NULL)
-		return (NULL);
-	ft_memset(new, '\0', size + 1);
-	return (new);
+	nb_char = (size_t)ft_strlen(src);
+	if (!(dest = ft_strnew(nb_char)))
+		return (0);
+	i = 0;
+	while (i < nb_char)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	return (dest);
 }

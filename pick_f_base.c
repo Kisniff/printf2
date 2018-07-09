@@ -49,7 +49,7 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 		result = to_base(tmp, BASE_H);
 	else if (*ptr == 'X')
 		result = to_base(tmp, BASE_HC);
-	else if (*ptr == 'o')
+	else if (*ptr == 'o' || *ptr == 'O')
 		result = to_base(tmp, BASE_O);
 	return (result);
 }
@@ -57,17 +57,20 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 static int	exception_zero_x(char *result, t_data *data, const char *ptr)
 {
 	data->len = 0;
-	if (data->precision == 0)
-		data->precision = ((*ptr == 'o' || *ptr == 'O') && data->flags[SHARP] > 0) ? 0 : -1;
-	if (data->precision == 0 && data->width == 0)
+	//printf("data->precision EO -> %d\n", data->precision);
+	//printf("data->widthEO -> %d\n", data->width);
+	//printf("data-> sharp EO -> %d\n", data->flags[SHARP]);
+	if (data->precision == 0 && data->width <= 1 && data->flags[SHARP] == 0)
 		return (fill_buff_c(data, '0'));
-	if (data->precision < 0)
+	if (data->precision == 0)
+		data->precision = ((*ptr == 'o' || *ptr == 'O') && data->flags[SHARP] > 0) ? 1 : -1;
+	if (data->flags[MINUS] > 0)
 	{
-		//printf("a\n");
+		f_precision(data);
 		f_width(data);
 		return (0);
 	}
-	if (data->precision > 0)
+	else if (data->precision > 0)
 	{
 		//printf("b\n");
 		f_width(data);
@@ -76,7 +79,6 @@ static int	exception_zero_x(char *result, t_data *data, const char *ptr)
 	else if (data->flags[ZERO])
 	{
 		//printf("c\n");
-		f_width(data);
 		f_zero(data);
 	}
 	else if (data->width > 0)
@@ -84,7 +86,7 @@ static int	exception_zero_x(char *result, t_data *data, const char *ptr)
 		//printf("d\n");
 		f_width(data);
 	}
-	else
+	else if (data->precision >= 0)
 	{
 		//printf("e\n");
 		return (fill_buff_c(data, '0'));
@@ -127,12 +129,16 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr)
 	char	*result;
 
 	result = determine_xo_call(ptr, param, data);
-	data->len = ft_strlen(result);
+	//printf("result -> %s\n", result);
+	data->len = (result != NULL) ? ft_strlen(result) : 0;
+	//printf("data->len-> %d\n", data->len);
 	if (data->len == 1 && *result == '0')
 		return(exception_zero_x(result, data, ptr));
-	data->len = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ? data->len + 2 : data->len;
+	data->width = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ? data->width - 2 : data->width;
 	data->len = (data->flags[SHARP] && (*ptr == 'o' || *ptr == 'O')) ? ++data->len : data->len;
-	data->precision = (data->precision > data->len) ? data->precision - (data->len) : 0;
+	//printf("1 data->precision-> %d\n", data->precision);
+	data->precision = (data->precision > data->len) ? data->precision - data->len : 0;
+	//printf("2 data->precision-> %d\n", data->precision);
 	if (data->flags[MINUS])
 	{
 		//printf("A\n");

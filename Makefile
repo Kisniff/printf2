@@ -21,6 +21,7 @@ SRC = main.c to_base.c string.c int.c length.c flags.c path.c precision.c pick_f
       ft_strnew.c \
       ft_strdel.c \
       ft_atoi.c \
+      ft_strdup.c \
       pick_f_w.c \
       pick_f_percent.c 
 
@@ -36,7 +37,7 @@ $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ) 
 
 yo: 	$(OBJ)
-	@gcc $(FLAGS) -o $(NAMEN)  $(OBJ) -lft -L./libft/.
+	@gcc $(FLAGS) -fsanitize=address -g -o $(NAMEN)  $(OBJ) -lft -L./libft/.
 	@rm -f $(OBJ)
 
 clean:
