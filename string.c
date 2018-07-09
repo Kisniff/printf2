@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:13:59 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/09 14:49:57 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:14:32 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,20 @@ int	fill_buff_c(t_data *data, char c)
 	return (0);
 }
 
-int	pick_f_s(const char *ptr, t_data *data, va_list param)
-{
-	char *str;
-	if (*ptr == 'S' || (*ptr == 's' && data->flags[L] == 1))
-	{
-		str = va_arg(param, char*);
-	}
-
-	return (0);
-}
-
-int	string_param(t_data *data, va_list param)
-{
-	char *str;
-
-	str = va_arg(param, char*);
-	print_str(str, data);
-	return (0);
-}
-
-int	print_str(char *str, t_data *data)
+int	print_str(char *str, t_data *data, char *ptr)
 {//un putstr qui incrémente notre valeur de retour
 	int	i;
 
 	i = -1;
-	while (str[++i])
-		fill_buff_c(data, str[i]);
+	if (*ptr == 's' || *ptr == 'S')
+		while (str[++i] && i < data->len)
+		{
+			fill_buff_c(data, str[i]);
+			printf("str -> %c\n", str[i]);
+		}
+	else
+		while (str[++i])
+			fill_buff_c(data, str[i]);
 	return (data->ret_val);
 }
 

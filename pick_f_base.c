@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 14:57:48 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:13:26 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 static int	f_x_sharp(t_data *data, const char *ptr, char *result)
 {
 	if (data->flags[SHARP] > 0 && *ptr == 'x')
-		print_str("0x", data);
+		print_str("0x", data, 's');
 	else if (data->flags[SHARP] && *ptr == 'X')
-		print_str("0X", data);
+		print_str("0X", data, 's');
 	else if (data->flags[SHARP] && (*ptr == 'o' || *ptr == 'O'))
-		print_str("0", data);
+		print_str("0", data, 's');
 	return (0);
 }
 
@@ -137,14 +137,14 @@ int	pick_f_x_two(char *result, t_data *data, const char *ptr)
 		//printf("C\n");
 		f_x_sharp(data, ptr, result);
 		f_zero(data);
-		print_str(result, data);
+		print_str(result, data, 's');
 	}
 	else if (data->width > 0)
 	{
 		//printf("D\n");
 		f_width(data);
 		f_x_sharp(data, ptr, result);
-		print_str(result, data);
+		print_str(result, data, 's');
 	}
 	else
 	{
@@ -152,7 +152,7 @@ int	pick_f_x_two(char *result, t_data *data, const char *ptr)
 		//printf("0 buff -> %s\n", data->buff);
 		f_x_sharp(data, ptr, result);
 		//printf("1 buff -> %s\n", data->buff);
-		print_str(result, data);
+		print_str(result, data, 's');
 		//printf("2 buff -> %s\n", data->buff);
 	}
 	return (0);
@@ -180,7 +180,7 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr)
 		//printf("A\n");
 		f_x_sharp(data, ptr, result);
 		f_precision(data);
-		print_str(result, data);
+		print_str(result, data, 's');
 		f_width(data);
 	}
 	else if (data->precision > 0)
@@ -189,7 +189,7 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr)
 		f_width(data);
 		f_x_sharp(data, ptr, result);
 		f_precision(data);
-		print_str(result, data);
+		print_str(result, data, 's');
 	}
 	else (pick_f_x_two(result, data, ptr));
 	free(result);

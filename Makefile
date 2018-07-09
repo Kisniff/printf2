@@ -6,7 +6,7 @@
 #    By: jlehideu <jlehideu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 10:23:16 by jlehideu          #+#    #+#              #
-#    Updated: 2018/06/23 16:40:11 by jlehideu         ###   ########.fr        #
+#    Updated: 2018/07/09 16:55:37 by jlehideu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = main.c to_base.c string.c int.c length.c flags.c path.c precision.c pick_f
       ft_atoi.c \
       ft_strdup.c \
       pick_f_w.c \
+      pick_f_s.c \
       pick_f_percent.c 
 
 OBJ = $(SRC:.c=.o) 

@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/09 16:00:10 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:03:43 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int main(void)
 
 	test = NULL;
 	setlocale(LC_ALL, "");
-	printf("Vret -> %d\n", printf("vous %-12C\n", 1234));
-	printf("Nret -> %d\n", ft_printf("nous %-12C\n", 1234));
+	printf("Vret -> %d\n", printf("vous %-3.4s\n", NULL));
+	printf("Nret -> %d\n", ft_printf("nous %-3.4s\n", NULL));
 //	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
 //	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
 	return (0);

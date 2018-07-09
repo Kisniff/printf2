@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/29 12:37:22 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/09 18:11:21 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ int	length_j(t_data *data);
 int	length_z(t_data *data);
 int	width(char *ptr, t_data *data);
 int	precision(const char *ptr, t_data *data);
-int	print_str(char *str, t_data *data);
+int	print_str(char *str, t_data *data, char *ptr);
 void	print_char(char c, t_data *data);
 int	width_min(const char *ptr, t_data *data);
 char	*to_base(uintmax_t nb, char *base);
 int	pick_f_u(va_list param, t_data *data, const char *ptr);
 int	pick_f_base(va_list param, t_data *data, const char *ptr);
 int	pick_f_c(va_list param, t_data *data);
-int	pick_f_s(const char *str, t_data *data, va_list param);
 int	pick_f_w(t_data *data, va_list param);
-int	pick_f_percent(va_list param, t_data *data) ;
+int	pick_f_percent(va_list param, t_data *data);
+int	pick_f_s(va_list param, t_data *data, char *str);
 int	f_precision(t_data *data);
 int	f_zero(t_data *data);
 int	f_width(t_data *data);
@@ -90,7 +90,6 @@ int	check_s_c_p(t_data *data);
 int	check_di(t_data *data);
 int	check_ox(t_data *data);
 int	check_u(t_data *data);
-int	fill_buff_s(t_data *data, int i, char *str);
 int	fill_buff_c(t_data *data, char c);
 int	ft_printf(const char *str, ...);
 char	*ft_strnew(size_t size);
