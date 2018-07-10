@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 16:09:27 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/10 15:53:14 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static uintmax_t	retrieve_u_param(t_data *data, va_list param)
 		return (va_arg(param, unsigned long long));
 	}
 	else if (data->length[H] == 1)
-		return (va_arg(param, unsigned short));
+		return ((unsigned short)va_arg(param, unsigned long));
 	else if (data->length[H] == 2)
-		return (va_arg(param, unsigned char));
+		return ((unsigned char)va_arg(param, unsigned long));
 	else if (data->length[J] == 1)
 		return (va_arg(param, uintmax_t));
 	else if (data->length[Z] == 1)

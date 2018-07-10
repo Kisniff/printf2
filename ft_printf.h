@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/09 18:11:21 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/10 16:11:44 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr);
 int	pick_f_c(va_list param, t_data *data);
 int	pick_f_w(t_data *data, va_list param);
 int	pick_f_percent(va_list param, t_data *data);
-int	pick_f_s(va_list param, t_data *data, char *str);
+int	pick_f_s(va_list param, t_data *data, const char *str);
 int	f_precision(t_data *data);
 int	f_zero(t_data *data);
 int	f_width(t_data *data);

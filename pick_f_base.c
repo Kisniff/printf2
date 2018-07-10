@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 18:13:26 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/10 15:54:58 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,22 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 	if (data->length[H] == 2)
 	{
 		//printf("hh\n");
-		tmp = (uintmax_t)va_arg(param, unsigned char);
+		tmp = (unsigned char)va_arg(param, unsigned long);
 	}
 	else if (data->length[H] == 1)
 	{
 		//printf("h\n");
-		tmp = (uintmax_t)va_arg(param, unsigned short);
+		tmp = (unsigned short)va_arg(param, unsigned long);
 	}
 	else if (data->length[L] == 1)
 	{
 		//printf("l\n");
-		tmp = (uintmax_t)va_arg(param, unsigned long);
+		tmp = va_arg(param, unsigned long);
 	}
 	else if (data->length[L] == 2)
 	{
 		//printf("ll\n");
-		tmp = (uintmax_t)va_arg(param, unsigned long long);
+		tmp = va_arg(param, unsigned long long);
 	}
 	else if (data->length[J] == 1)
 	{
@@ -57,7 +57,7 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 	else if (data->length[Z] == 1)
 	{
 		//printf("z\n");
-		tmp = (uintmax_t)va_arg(param, size_t);
+		tmp = va_arg(param, size_t);
 	}
 	else if (*ptr == 'x' || *ptr == 'X')
 	{
