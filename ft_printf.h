@@ -95,7 +95,8 @@ int	fill_buff_c(t_data *data, char c);
 int	ft_printf(const char *str, ...);
 char	*ft_strnew(size_t size);
 int	write_str(t_data *data, char *str);
-void	write_w(t_data *data, wchar_t unicode);
+int	write_w(t_data *data, wchar_t unicode);
+void	determine_w_len(t_data *data, wchar_t unicode);
 
 
 #endif

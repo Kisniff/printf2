@@ -67,20 +67,17 @@ void	write_double(wchar_t unicode, t_data *data)
 void	determine_w_len(t_data *data, wchar_t unicode)
 {
 	if (unicode < 129)
-		data->len = 1;
+		data->len += 1;
 	else if (unicode < 2049)
-		data->len = 2;
+		data->len += 2;
 	else if (unicode < 55295)
-		data->len = 3;
+		data->len += 3;
 	else if (unicode < 2097152)
-		data->len = 4;
+		data->len += 4;
 }
 
-void	write_w(t_data *data, wchar_t unicode)
+int	write_w(t_data *data, wchar_t unicode)
 {
-	determine_w_len(data, unicode);
-	if (data->flags[MINUS] == 0 && data->width > 0)
-		f_width(data);
 	if (unicode < 129)
 	{
 		fill_buff_c(data, unicode);
@@ -96,7 +93,11 @@ void	write_w(t_data *data, wchar_t unicode)
 	else if (unicode < 2097152)
 		write_quadruple(unicode, data);
 	if (data->flags[MINUS] > 0)
+	{
 		f_width(data);
+		return (-1);
+	}
+	return (0);
 }
 
 int	pick_f_w(t_data *data, va_list param)
@@ -105,6 +106,9 @@ int	pick_f_w(t_data *data, va_list param)
 	
 	if((unicode = va_arg(param, wchar_t)) < 0 || unicode > 2097152)
 		return(data->ret_val = -1);
+	determine_w_len(data, unicode);
+	if (data->flags[MINUS] == 0 && data->width > 0)
+		f_width(data);
 	write_w(data, unicode);
 	return (0);
 }

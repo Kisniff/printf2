@@ -34,6 +34,7 @@ void	init_struct(t_data *data)
 	data->precision = 0;
 	//modifier la data precision
 	data->width = 0;
+	data->len = 0;
 	i = -1;
 	while (++i <= 4)
 		data->flags[i] = 0;
@@ -70,7 +71,7 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-
+/*
 int main(void)
 {//fix two commented codes@
 //fail 0095
@@ -80,9 +81,7 @@ int main(void)
 
 	test = NULL;
 	setlocale(LC_ALL, "");
-	printf("Vret -> %d\n", printf("vous -> %-12S", L"ÀÁŰȣ"));
-	printf("Nret -> %d\n", ft_printf("nous -> %-12S", 256));
-//	printf("Vret -> %d\n", printf("vous %#.6x\n", 987));
-//	printf("Nret -> %d\n", printf("nous %#.6x\n", 987));
+	printf("Vret -> %d\n", printf("vous -> %.4S\n", L"ÀÁŰȣ"));
+	printf("Nret -> %d\n", ft_printf("nous -> %.4S\n", L"ÀÁŰȣ"));
 	return (0);
-}
+}*/
