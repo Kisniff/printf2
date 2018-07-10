@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:08:46 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/10 16:28:29 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/10 17:48:13 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-static int	write_str(t_data *data, char *str)
+int	write_str(t_data *data, char *str)
 {
 	int	i;
 

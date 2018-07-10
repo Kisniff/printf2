@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:09:32 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 16:09:33 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/10 17:54:55 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,8 @@ void	determine_w_len(t_data *data, wchar_t unicode)
 		data->len = 4;
 }
 
-int	pick_f_w(t_data *data, va_list param)
+void	write_w(t_data *data, wchar_t unicode)
 {
-	wchar_t unicode;
-	
-	if((unicode = va_arg(param, wchar_t)) < 0 || unicode > 2097152)
-		return(data->ret_val = -1);
 	determine_w_len(data, unicode);
 	if (data->flags[MINUS] == 0 && data->width > 0)
 		f_width(data);
@@ -101,5 +97,14 @@ int	pick_f_w(t_data *data, va_list param)
 		write_quadruple(unicode, data);
 	if (data->flags[MINUS] > 0)
 		f_width(data);
+}
+
+int	pick_f_w(t_data *data, va_list param)
+{
+	wchar_t unicode;
+	
+	if((unicode = va_arg(param, wchar_t)) < 0 || unicode > 2097152)
+		return(data->ret_val = -1);
+	write_w(data, unicode);
 	return (0);
 }
