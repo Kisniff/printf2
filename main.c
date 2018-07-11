@@ -51,8 +51,8 @@ int	 ft_printf(const char *str, ...)
 	t_data		data;
 
 	va_start(pointerlst, str);
-//	if (check(str) == -1)
-//		return (-1);
+	//if (check(str) == -1)
+	//	return (-1);
 	init_struct(&data);
 	data.ret_val = 0;
 	data.idx = -1;

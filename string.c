@@ -32,7 +32,7 @@ int	fill_buff_c(t_data *data, char c)
 	return (0);
 }
 
-int	print_str(char *str, t_data *data, char *ptr)
+int	print_str(char *str, t_data *data, const char *ptr)
 {//un putstr qui incrémente notre valeur de retour
 	int	i;
 

@@ -25,7 +25,8 @@ SRC = main.c to_base.c string.c int.c length.c flags.c path.c precision.c pick_f
       pick_f_w.c \
       pick_f_s.c \
       pick_f_bigs.c \
-      pick_f_percent.c 
+      pick_f_percent.c \
+      void.c \
 
 OBJ = $(SRC:.c=.o) 
 
