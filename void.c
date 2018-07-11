@@ -94,7 +94,10 @@ int		void_param(va_list param, t_data *data, const char *ptr)
 	else
 		str = ft_strnew(ft_strlen(result + 2));
 	str = initstr(str);
+	data->len = ft_strlen(str);
 	str = add_char(str, result, data->precision + 2);
+	if (data->width > 0)
+		f_width(data);
 	print_str(str, data, ptr);
 	ft_strdel(&result);
 	ft_strdel(&str);
