@@ -12,8 +12,6 @@
 
 #include "ft_printf.h"
 
-#include "ft_printf.h"
-
 static char	*ft_swap_chars(char *str)
 {
 	int	i;
@@ -42,7 +40,7 @@ static char	*address(uintptr_t nb, char *base)
 	char		*result;
 
 	prod = 16;
-	i = 2;
+	i = 0;
 	tmp = nb;
 	while (tmp > 0)
 	{
@@ -51,9 +49,8 @@ static char	*address(uintptr_t nb, char *base)
 	}
 	if (!(result = ft_strnew(i)))
 		return (NULL);
-	result = initstr(result);
 	result[i] = '\0';
-	while (--i >= 2)
+	while (--i >= 0)
 	{
 		result[i] = base[nb % prod];
 		nb = nb / prod;
@@ -63,11 +60,43 @@ static char	*address(uintptr_t nb, char *base)
 	return (result);
 }
 
+static char	*add_char(char *str, char *result, int precision)
+{
+	int i;
+	int j;
+	int l;
+
+	l = ft_strlen(result);
+	i = 2;
+	while (i + l < precision)
+	{
+		str[i] = '0';
+		i++;
+	}
+	j = 0;
+	while (result[j])
+	{
+		str[i] = result[j];
+		i++;
+		j++;
+	}
+	return (str);
+}
+
 int		void_param(va_list param, t_data *data, const char *ptr)
 {
 	char *result;
+	char *str;
 
 	result = address(va_arg(param, uintptr_t), BASE_H);
-	print_str(result, data, ptr);
+	if (data->precision > 0 && ft_strlen(result) < (data->precision))
+		str = ft_strnew(data->precision + 2);
+	else
+		str = ft_strnew(ft_strlen(result + 2));
+	str = initstr(str);
+	str = add_char(str, result, data->precision + 2);
+	print_str(str, data, ptr);
+	ft_strdel(&result);
+	ft_strdel(&str);
 	return (0);
 }
