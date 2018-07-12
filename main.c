@@ -31,7 +31,7 @@ void	init_struct(t_data *data)
 {
 	int i;
 
-	data->precision = 0;
+	data->precision = -1;
 	//modifier la data precision
 	data->width = 0;
 	data->len = 0;
@@ -81,7 +81,7 @@ int main(void)
 
 	test = NULL;
 	setlocale(LC_ALL, "");
-	printf("Vret -> %d\n", printf("vous -> %.4S\n", L"ÀÁŰȣ"));
-	printf("Nret -> %d\n", ft_printf("nous -> %.4S\n", L"ÀÁŰȣ"));
+	printf("%.p\n", 0);
+	ft_printf("%.p\n", 0);
 	return (0);
 }*/

@@ -47,9 +47,10 @@ static char	*address(uintptr_t nb, char *base)
 		tmp = tmp / prod;
 		i++;
 	}
+	if (i == 0)
+		i = 1;
 	if (!(result = ft_strnew(i)))
 		return (NULL);
-	result[i] = '\0';
 	while (--i >= 0)
 	{
 		result[i] = base[nb % prod];
@@ -87,17 +88,20 @@ int		void_param(va_list param, t_data *data, const char *ptr)
 {
 	char *result;
 	char *str;
+	uintptr_t nb;
 
-	result = address(va_arg(param, uintptr_t), BASE_H);
-	if (data->precision > 0 && ft_strlen(result) < (data->precision))
+	nb = va_arg(param, uintptr_t);
+	result = address(nb, BASE_H);
+	if (data->precision > -1 && ft_strlen(result) < (data->precision))
 		str = ft_strnew(data->precision + 2);
 	else
 		str = ft_strnew(ft_strlen(result + 2));
 	str = initstr(str);
+	if (nb > 0 || data->precision != 0)
+		str = add_char(str, result, data->precision + 2);
 	data->len = ft_strlen(str);
-	str = add_char(str, result, data->precision + 2);
 	if (data->width > 0)
-		f_width(data);
+		f_width_p(data);
 	print_str(str, data, ptr);
 	ft_strdel(&result);
 	ft_strdel(&str);

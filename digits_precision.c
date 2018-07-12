@@ -37,3 +37,15 @@ int	f_width(t_data *data)
 			fill_buff_c(data, ' ');
 	return (0);
 }
+
+int	f_width_p(t_data *data)
+{
+	int	width;
+	int	precision;
+
+	width = (int)(data->width - data->len);
+	if (width > 0)
+		while (--width >= 0)
+			fill_buff_c(data, ' ');
+	return (0);
+}
