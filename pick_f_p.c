@@ -84,7 +84,7 @@ static char	*add_char(char *str, char *result, int precision)
 	return (str);
 }
 
-int		void_param(va_list param, t_data *data, const char *ptr)
+int		pick_f_p(va_list param, t_data *data, const char *ptr)
 {
 	char *result;
 	char *str;

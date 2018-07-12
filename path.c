@@ -73,7 +73,7 @@ int		conversion(const char *ptr, va_list param, t_data *data)
 	else if (*ptr == 'S')
 		pick_f_bigs(param, data);
 	else if (*ptr == 'p')
-		void_param(param, data, ptr);
+		pick_f_p(param, data, ptr);
 	else if (*ptr == 'd' || *ptr == 'i' || *ptr == 'D')
 		int_param(param);
 	else if (*ptr == 'o' || *ptr == 'O')

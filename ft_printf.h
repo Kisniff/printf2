@@ -51,7 +51,7 @@ int	path(char *ptr, va_list param, t_data *data);
 int	conversion(const char *ptr, va_list param, t_data *data);
 int	int_param(va_list param);
 int	string_param(t_data *data, va_list param);
-int	void_param(va_list param, t_data *data, const char *ptr);
+int	pick_f_p(va_list param, t_data *data, const char *ptr);
 int	unsignedint_param_oct(va_list param);
 int	unsignedint_param(va_list param);
 int	unsignedint_param_hex(const char *ptr, va_list param);
@@ -97,6 +97,8 @@ char	*ft_strnew(size_t size);
 int	write_str(t_data *data, char *str);
 int	write_w(t_data *data, wchar_t unicode);
 void	determine_w_len(t_data *data, wchar_t unicode);
+int	f_width_p(t_data *data);
+
 
 
 #endif
