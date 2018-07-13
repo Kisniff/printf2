@@ -13,6 +13,7 @@
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <wchar.h>
 #include <locale.h>
 #include <limits.h>
@@ -70,17 +71,24 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-/*
+
+
 int main(void)
 {//fix two commented codes@
 //fail 0095
 	int	i;
 	int	ret;
-	char	*test;
+	int	fd;
+	wchar_t	s[4];
 
-	test = NULL;
 	setlocale(LC_ALL, "");
-	printf("Vret -> %d\n", printf("vous -> %.s\n", NULL));
-	printf("Nret -> %d\n", ft_printf("nous -> %.s\n", NULL));
+	i = 55295;
+	s[0] = 0x53;
+	s[1] = 0x3abc;
+	s[2] = 0x81000;
+	s[3] = '\0';
+	printf("Vret -> %d\n", printf("vous -> %.5ls", s));
+	printf("Nret -> %d\n", ft_printf("nous -> %.5ls", s));
+//	printf("Nret -> %d\n", ft_printf("nous -> %C\n", 1179647));
 	return (0);
-}*/
+}

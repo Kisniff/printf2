@@ -25,14 +25,19 @@ void	write_quadruple(wchar_t unicode, t_data *data)
 
 	if (!(str = ft_strnew(4)))
 		return ;
+	//printf("ret->val %d\n", data->ret_val);
 	str[0] = (unicode >> 18) + 0xf0;
 	str[1] = (unicode >> 12 & 0x3f) + 0x80;
 	str[2] = (unicode >> 6 & 0x3f) + 0x80;
 	str[3] = (unicode & 0x3f) + 0x80;
 	fill_buff_c(data, str[0]);
+	//printf("ret->val %d\n", data->ret_val);
 	fill_buff_c(data, str[1]);
+	//printf("ret->val %d\n", data->ret_val);
 	fill_buff_c(data, str[2]);
+	//printf("ret->val %d\n", data->ret_val);
 	fill_buff_c(data, str[3]);
+	//printf("ret->val %d\n", data->ret_val);
 	ft_strdel(&str);
 }
 
@@ -80,18 +85,24 @@ int	write_w(t_data *data, wchar_t unicode)
 {
 	if (unicode < 129)
 	{
+		//printf("simple\n");
 		fill_buff_c(data, unicode);
 	}
 	else if (unicode < 2049)
 	{
+		//printf("double\n");
 		write_double(unicode, data);
 	}
-	else if (unicode < 55295)
+	else if (unicode < 65536)
 	{
+		//printf("triple\n");
 		write_triple(unicode, data);
 	}
 	else if (unicode < 2097152)
+	{
+		//printf("quadruple\n");
 		write_quadruple(unicode, data);
+	}
 	if (data->flags[MINUS] > 0)
 	{
 		f_width(data);
@@ -104,11 +115,26 @@ int	pick_f_w(t_data *data, va_list param)
 {
 	wchar_t unicode;
 	
+	//printf("ret->val %d\n", data->ret_val);
 	if((unicode = va_arg(param, wchar_t)) < 0 || unicode > 2097152)
 		return(data->ret_val = -1);
 	determine_w_len(data, unicode);
 	if (data->flags[MINUS] == 0 && data->width > 0)
 		f_width(data);
-	write_w(data, unicode);
+	if (MB_CUR_MAX == 1 && unicode <= 255)
+	{
+		//printf("A\n");
+		fill_buff_c(data, unicode);
+	}
+	else if (MB_CUR_MAX == 1 || unicode > 1114111 ||unicode < 0 || (unicode >= 55295 && unicode <= 57343))
+	{
+		//printf("B\n");
+		data->ret_val = -1;
+	}
+	else
+	{
+		//printf("C -> %d\n", MB_CUR_MAX);
+		write_w(data, unicode);
+	}
 	return (0);
 }

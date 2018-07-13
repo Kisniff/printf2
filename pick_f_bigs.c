@@ -67,6 +67,7 @@ int	pick_f_bigs(va_list param, t_data *data)
 		determine_w_len(data, str[i]);
 	data->len = (data->precision < 0 ) ? 0 : data->len;
 	data->len = (data->precision > 0 && data->precision < data->len) ? data->precision : data->len;
+	printf("data->len %zu\n", data->len);
 	if (data->flags[MINUS])
 	{
 		printf("A\n");
