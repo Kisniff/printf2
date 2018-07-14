@@ -71,7 +71,7 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-
+/*
 int main(void)
 {//fix two commented codes@
 //fail 0095
@@ -80,7 +80,7 @@ int main(void)
 	int	fd;
 	wchar_t	s[4];
 
-//	setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
 	i = 55295;
 	s[0] = 0x53;
 	s[1] = 0x3abc;
@@ -89,4 +89,4 @@ int main(void)
 	printf("Vret -> %d\n", printf("vous -> %---10.5ls\n", s));
 	printf("Nret -> %d\n", ft_printf("nous -> %---10.5ls\n", s));
 	return (0);
-}
+}*/

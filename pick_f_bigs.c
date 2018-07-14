@@ -96,7 +96,8 @@ int	pick_f_bigs(va_list param, t_data *data)
 		//printf("A\n");
 		write_bigs(data, str);
 		//printf("data->len %zu\n", data->len);
-		f_width(data);
+		//printf("data->width %d\n", data->width);
+		f_width_s(data);
 	}
 	else if (data->flags[ZERO])
 	{

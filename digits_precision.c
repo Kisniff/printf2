@@ -30,8 +30,27 @@ int	f_width(t_data *data)
 	int	width;
 	int	precision;
 
+	//printf("F_WIDTH\n");
 	precision = (data->precision > 0) ? data->precision : 0;
+	//printf("data->width -> %d\n", data->width);
 	width = (int)(data->width - (data->len + precision));
+	//printf("width -> %d\n", width);
+	//printf("data->precision-> %d\n", data->width);
+	if (width > 0)
+		while (--width >= 0)
+			fill_buff_c(data, ' ');
+	return (0);
+}
+
+int	f_width_s(t_data *data)
+{
+	int	width;
+
+	//printf("F_WIDTH_S\n");
+	//printf("data->width -> %d\n", data->width);
+	width = (int)(data->width - data->len);
+	//printf("width -> %d\n", width);
+	//printf("data->len-> %d\n", data->len);
 	if (width > 0)
 		while (--width >= 0)
 			fill_buff_c(data, ' ');

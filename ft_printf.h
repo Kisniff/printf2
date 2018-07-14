@@ -83,6 +83,7 @@ int	pick_f_s(va_list param, t_data *data, const char *str);
 int	f_precision(t_data *data);
 int	f_zero(t_data *data);
 int	f_width(t_data *data);
+int	f_width_s(t_data *data);
 void	init_struct(t_data *data);
 int	check(const char *ptr);
 int	path_check(char *ptr, t_data *data);

@@ -42,7 +42,7 @@ static int	exception_s(t_data *data)
 	{
 		//printf("A\n");
 		write_str(data, "(null)");
-		f_width(data);
+		f_width_s(data);
 	}
 	else if (data->flags[ZERO])
 	{
@@ -53,7 +53,7 @@ static int	exception_s(t_data *data)
 	else if (data->width > 0)
 	{
 		//printf("C\n");
-		f_width(data);
+		f_width_s(data);
 		write_str(data, "(null)");
 	}
 	else
@@ -72,7 +72,7 @@ static int	pick_f_s_2(char *str, t_data *data)
 	if (data->width > 0)
 	{
 		//printf("C\n");
-		f_width(data);
+		f_width_s(data);
 		write_str(data, str);
 	}
 	else
@@ -102,7 +102,7 @@ int	pick_f_s(va_list param, t_data *data, const char *ptr)
 	{
 		//printf("A\n");
 		write_str(data, str);
-		f_width(data);
+		f_width_s(data);
 	}
 	else if (data->flags[ZERO])
 	{
