@@ -68,15 +68,15 @@ int		length(const char *ptr, t_data *data)
 
 int		conversion(const char *ptr, va_list param, t_data *data)
 {
-	printf("data flag l -> %d\n", data->flags[L]);
-	if (*ptr == 'S' || (*ptr == 's' && data->flags[L] == 1))
+	//printf("data flag l -> %d\n", data->flags[L]);
+	if (*ptr == 'S' || (*ptr == 's' && data->length[L] == 1))
 	{
-		printf("S\n");
+		//printf("S\n");
 		pick_f_bigs(param, data);
 	}
 	else if (*ptr == 's')
 	{
-		printf("s\n");
+		//printf("s\n");
 		pick_f_s(param, data, ptr);
 	}
 	else if (*ptr == 'p')

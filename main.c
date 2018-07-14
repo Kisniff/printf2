@@ -72,7 +72,6 @@ int	 ft_printf(const char *str, ...)
 	return (data.ret_val);
 }
 
-
 int main(void)
 {//fix two commented codes@
 //fail 0095
@@ -81,14 +80,13 @@ int main(void)
 	int	fd;
 	wchar_t	s[4];
 
-	setlocale(LC_ALL, "");
+//	setlocale(LC_ALL, "");
 	i = 55295;
 	s[0] = 0x53;
 	s[1] = 0x3abc;
 	s[2] = 0x81000;
 	s[3] = '\0';
-	printf("Vret -> %d\n", printf("vous -> %.5ls", s));
-	printf("Nret -> %d\n", ft_printf("nous -> %.5ls", s));
-//	printf("Nret -> %d\n", ft_printf("nous -> %C\n", 1179647));
+	printf("Vret -> %d\n", printf("vous -> %---10.5ls\n", s));
+	printf("Nret -> %d\n", ft_printf("nous -> %---10.5ls\n", s));
 	return (0);
 }
