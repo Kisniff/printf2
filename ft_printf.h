@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/10 17:54:28 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:27:46 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	pick_f_bigs(va_list param, t_data *data);
 int	pick_f_s(va_list param, t_data *data, const char *str);
 int	f_precision(t_data *data);
 int	f_zero(t_data *data);
+int	f_zero_s(t_data *data);
 int	f_width(t_data *data);
 int	f_width_s(t_data *data);
 void	init_struct(t_data *data);

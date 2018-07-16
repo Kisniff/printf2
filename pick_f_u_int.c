@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/10 15:53:14 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 17:34:18 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	pick_f_u(va_list param, t_data *data, const char *ptr)
 	//printf("nb -> %u\n", nb);
 	//printf("data->len %zu\nnb -> %zu\n", data->len, nb);
 	//printf("data->precision -> %d\n", data->precision);
+	data->flags[ZERO] = (data->precision == 0) ? data->flags[ZERO] : 0;
 	if (data->len == 1 && nb == 0)
 	{
 		//printf("exception\n");

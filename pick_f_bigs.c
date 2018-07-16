@@ -3,29 +3,42 @@
 
 static int	exception_bigs(t_data *data, char *str)
 {
+	int		i;
+	int		len;
+
+	i = -1;
 	//printf("Exception\n");
+	data->len = (data->precision > 0) ? data->precision : 6;
+	data->len = (data->precision < 0) ? 0 : data->len;
+	len = data->len;
 	if (data->flags[MINUS])
 	{
 		//printf("A\n");
-		write_str(data, str);
-		f_width(data);
+		while (str[++i] && --len >= 0)
+			fill_buff_c(data, str[i]);
+		//printf("data->len - %d\n", data->len);
+		//printf("data->width- %d\n", data->width);
+		f_width_s(data);
 	}
 	else if (data->flags[ZERO])
 	{
 		//printf("B\n");
-		f_zero(data);
-		write_str(data, str);
+		f_zero_s(data);
+		while (str[++i] && --len >= 0)
+			fill_buff_c(data, str[i]);
 	}
 	else if (data->width > 0)
 	{
 		//printf("C\n");
-		f_width(data);
-		write_str(data, str);
+		f_width_s(data);
+		while (str[++i] && --len >= 0)
+			fill_buff_c(data, str[i]);
 	}
 	else
 	{
 		//printf("D\n");
-		write_str(data, str);
+		while (str[++i] && --len >= 0)
+			fill_buff_c(data, str[i]);
 	}
 	return (0);
 }
@@ -141,6 +154,7 @@ int	pick_f_bigs(va_list param, t_data *data)
 //	if (data->len > data->precision)
 //		data->width += data->len - data->precision;
 	//data->len = (data->precision > 0 && data->precision < data->len) ? data->precision : data->len;
+	//printf("data->flags[ZERO] - %d\n", data->flags[ZERO]);
 	if (data->flags[MINUS])
 	{
 		//printf("A\n");
@@ -152,7 +166,7 @@ int	pick_f_bigs(va_list param, t_data *data)
 	else if (data->flags[ZERO])
 	{
 		//printf("B\n");
-		f_zero(data);
+		f_zero_s(data);
 		write_bigs(data, str);
 	}
 	else 

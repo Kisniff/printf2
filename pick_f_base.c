@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/10 15:54:58 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 17:33:15 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int	pick_f_base(va_list param, t_data *data, const char *ptr)
 	//printf("result -> %s\n", result);
 	data->len = (result != NULL) ? ft_strlen(result) : 0;
 	//printf("data->len-> %zu\n", data->len);
+	data->flags[ZERO] = (data->precision == 0) ? data->flags[ZERO] : 0;
 	if (data->len == 1 && *result == '0')
 		return(exception_zero_x(result, data, ptr));
 	data->width = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ? data->width - 2 : data->width;

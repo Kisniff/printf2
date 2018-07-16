@@ -25,6 +25,18 @@ int	f_zero(t_data *data)
 	return (0);
 }
 
+int	f_zero_s(t_data *data)
+{
+	int	zero;
+	int	precision;
+
+	zero = (int)(data->width - data->len);
+	if (zero > 0)
+		while(--zero >= 0)
+			fill_buff_c(data, '0');
+	return (0);
+}
+
 int	f_width(t_data *data)
 {
 	int	width;
