@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/16 17:34:45 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 18:50:37 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int main(void)
 //	s[2] = '\0';
 	s[3] = '\0';
 	//s = NULL;
-	printf("Vret -> %d\n", printf("vous -> %0012.o", 123654789));
-	printf("Nret -> %d\n", ft_printf("nous -> %0012.o", 123654789));
+	printf("Vret -> %d\n", printf("vous -> %-10.5ls", s));
+	printf("Nret -> %d\n", ft_printf("nous -> %-10.5ls", s));
 	return (0);
 }*/

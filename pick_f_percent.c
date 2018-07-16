@@ -6,16 +6,13 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:09:15 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 16:09:21 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 18:36:48 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-//sharp -> nothing happens
-//space -> same
-//+ -> same
-//precision -> same
+
 int	pick_f_percent(va_list param, t_data *data)
 {
 	unsigned int	nb;
@@ -24,12 +21,12 @@ int	pick_f_percent(va_list param, t_data *data)
 	data->len = 1;
 	data->precision = 0;
 	if (data->flags[MINUS])
-	{	
+	{
 		print_char('%', data);
 		f_width(data);
 	}
 	else if (data->flags[ZERO])
-	{ 
+	{
 		f_zero(data);
 		print_char('%', data);
 	}

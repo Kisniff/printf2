@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/16 16:27:46 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 18:30:38 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int	write_str(t_data *data, char *str);
 int	write_w(t_data *data, wchar_t unicode);
 void	determine_w_len(t_data *data, wchar_t unicode);
 int	f_width_p(t_data *data);
+int	exception_zero_x(char *result, t_data *data, const char *ptr);
+int	exception_bigs(t_data *data, char *ptr);
 
 
 
