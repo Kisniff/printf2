@@ -6,7 +6,7 @@
 #    By: jlehideu <jlehideu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 10:23:16 by jlehideu          #+#    #+#              #
-#    Updated: 2018/07/17 11:59:05 by jlehideu         ###   ########.fr        #
+#    Updated: 2018/07/17 13:45:51 by jlehideu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC = main.c to_base.c string.c int.c length.c flags.c path.c precision.c pick_f
       pick_f_bigs.c \
       pick_f_percent.c \
       pick_f_p.c \
-	  exceptions_func.c
+	  exceptions_func.c \
+	  ft_bzero.c
 
 OBJ = $(SRC:.c=.o) 
 
