@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 18:02:21 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/16 18:50:25 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 18:52:42 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void		determine_lengths(t_data *data, int *len, int i, wchar_t *str)
 		*len -= 4;
 		data->len += (*len >= 0) ? 4 : 0;
 	}
-	//printf("*len -> %d\n", *len);
 }
 
 static void		determine_ws_len(t_data *data, wchar_t *str)
@@ -93,13 +92,10 @@ int				pick_f_bigs(va_list param, t_data *data)
 	i = -1;
 	if (!str)
 		return (exception_bigs(data, "(null)"));
-	//printf("data->length - %d\n", data->len);
 	while (str[++i])
 		determine_w_len(data, str[i]);
-	//printf("data->length - %d\n", data->len);
 	if (data->precision > 0)
 		determine_ws_len(data, str);
-	//printf("data->length - %d\n", data->len);
 	data->len = (data->precision < 0) ? 0 : data->len;
 	if (data->flags[MINUS])
 	{

@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 17:52:57 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/16 18:34:59 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 19:00:26 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,28 @@ int		exception_bigs(t_data *data, char *str)
 	while (str[++i] && --len >= 0)
 		fill_buff_c(data, str[i]);
 	return (0);
+}
+
+int			exception_zero_u(t_data *data)
+{
+	data->len = 0;
+	if (data->precision == 0 && data->width == 0)
+		return (fill_buff_c(data, '0'));
+	if (data->precision < 0)
+	{
+		f_width(data);
+		return (0);
+	}
+	if (data->precision > 0)
+	{
+		f_width(data);
+		f_precision(data);
+	}
+	else if (data->flags[ZERO])
+		f_zero(data);
+	else if (data->width > 0)
+		f_width(data);
+	else
+		return (fill_buff_c(data, '0'));
+	return (1);
 }
