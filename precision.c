@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 15:13:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/16 17:24:52 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/17 11:49:57 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		precision(const char *ptr, t_data *data)
 		data->precision = -1;
 	else if (i > 0)
 		data->precision = ft_atoi(ptr);
-	else 
+	else
 		data->precision = -1;
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 17:52:57 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/16 19:00:26 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/17 11:54:49 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	exception_zero_x(char *result, t_data *data, const char *ptr)
 	return (1);
 }
 
-int		exception_bigs(t_data *data, char *str)
+int	exception_bigs(t_data *data, char *str)
 {
 	int		i;
 	int		len;
@@ -64,7 +64,7 @@ int		exception_bigs(t_data *data, char *str)
 	return (0);
 }
 
-int			exception_zero_u(t_data *data)
+int	exception_zero_u(t_data *data)
 {
 	data->len = 0;
 	if (data->precision == 0 && data->width == 0)

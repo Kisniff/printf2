@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:01:47 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/10 17:26:46 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/17 11:51:01 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,10 @@ int		length(const char *ptr, t_data *data)
 
 int		conversion(const char *ptr, va_list param, t_data *data)
 {
-	//printf("data flag l -> %d\n", data->flags[L]);
 	if (*ptr == 'S' || (*ptr == 's' && data->length[L] == 1))
-	{
-		//printf("S\n");
 		pick_f_bigs(param, data);
-	}
 	else if (*ptr == 's')
-	{
-		//printf("s\n");
 		pick_f_s(param, data, ptr);
-	}
 	else if (*ptr == 'p')
 		pick_f_p(param, data, ptr);
 	else if (*ptr == 'd' || *ptr == 'i' || *ptr == 'D')

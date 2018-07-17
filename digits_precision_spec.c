@@ -1,49 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   digits_precision.c                                 :+:      :+:    :+:   */
+/*   digits_precision_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/17 11:55:27 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/17 12:01:51 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/17 11:58:25 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/07/17 12:02:16 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int	f_precision(t_data *data)
-{
-	int	precision;
-
-	precision = data->precision;
-	if (precision > 0)
-		while (--precision >= 0)
-			fill_buff_c(data, '0');
-	return (0);
-}
-
-int	f_zero(t_data *data)
+int	f_zero_s(t_data *data)
 {
 	int	zero;
 	int	precision;
 
-	precision = (data->precision > 0) ? data->precision : 0;
-	zero = (int)(data->width - (data->len + precision));
+	zero = (int)(data->width - data->len);
 	if (zero > 0)
 		while (--zero >= 0)
 			fill_buff_c(data, '0');
 	return (0);
 }
 
-int	f_width(t_data *data)
+int	f_width_s(t_data *data)
+{
+	int	width;
+
+	width = (int)(data->width - data->len);
+	if (width > 0)
+		while (--width >= 0)
+			fill_buff_c(data, ' ');
+	return (0);
+}
+
+int	f_width_p(t_data *data)
 {
 	int	width;
 	int	precision;
 
-	precision = (data->precision > 0) ? data->precision : 0;
-	width = (int)(data->width - (data->len + precision));
+	width = (int)(data->width - data->len);
 	if (width > 0)
 		while (--width >= 0)
 			fill_buff_c(data, ' ');

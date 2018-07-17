@@ -6,10 +6,9 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/17 11:21:40 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/17 11:53:16 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_printf.h"
 #include <stdio.h>
@@ -18,7 +17,7 @@
 #include <locale.h>
 #include <limits.h>
 
-int	printuntil(const char *str, const char *ptr, t_data *data)
+static int	printuntil(const char *str, const char *ptr, t_data *data)
 {
 	int i;
 
@@ -28,7 +27,7 @@ int	printuntil(const char *str, const char *ptr, t_data *data)
 	return (i);
 }
 
-void	init_struct(t_data *data)
+void		init_struct(t_data *data)
 {
 	int i;
 
@@ -43,12 +42,12 @@ void	init_struct(t_data *data)
 		data->length[i] = 0;
 }
 
-int	 ft_printf(const char *str, ...)
+int			ft_printf(const char *str, ...)
 {
-	va_list		pointerlst;
-	char 		*ptr;
+	va_list	pointerlst;
+	char	*ptr;
 	int		i;
-	t_data		data;
+	t_data	data;
 
 	va_start(pointerlst, str);
 	//if (check(str) == -1)
@@ -71,6 +70,7 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
+
 /*
 int main(void)
 {//fix two commented codes@

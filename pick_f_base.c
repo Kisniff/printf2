@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/16 17:59:56 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/17 11:45:07 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 	return (determine_xo_call_two(ptr, data, tmp));
 }
 
-int			pick_f_x_two(char *result, t_data *data, const char *ptr)
+static int	pick_f_x_two(char *result, t_data *data, const char *ptr)
 {
 	if (data->precision > 0)
 	{

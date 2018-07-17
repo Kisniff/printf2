@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/17 11:23:04 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/17 11:36:29 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static uintmax_t	retrieve_u_param(t_data *data, va_list param)
 	return (va_arg(param, unsigned int));
 }
 
-int					pick_f_u_2(t_data *data, uintmax_t nb, int prec)
+static int			pick_f_u_2(t_data *data, uintmax_t nb, int prec)
 {
 	if (data->precision > 0)
 	{
