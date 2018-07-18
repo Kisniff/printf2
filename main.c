@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/17 13:49:18 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/18 15:13:05 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			ft_printf(const char *str, ...)
 	//	return (-1);
 	init_struct(&data);
 	data.ret_val = 0;
-	data.idx = -1;
+		data.idx = -1;
 	while ((ptr = ft_strchr(str, '%')) != NULL)
 	{
 		init_struct(&data);
@@ -63,6 +63,10 @@ int			ft_printf(const char *str, ...)
 		while (ptr && (i = path(ptr, pointerlst, &data)) > 0)
 			ptr += i;
 		str = ptr + 1;
+		if (data.ret_val > 0)
+			write(1, &data.buff, ++data.idx);
+		ft_memset(data.buff, '\0', BUFF_SIZE);
+		data.idx = -1;
 	}
 	printuntil(str, ptr, &data);
 	if (data.ret_val > -1)
@@ -70,8 +74,7 @@ int			ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-
-
+/*
 int main(void)
 {//modifier le parser pour erreur quand precision ou width >= 2147483640
 	int	i;
@@ -81,7 +84,7 @@ int main(void)
 	s[0] = 'a';
 	s[1] = 0x11ffff;
 	s[2] = '\0';
-	printf("Vret -> %d\n", printf("vous -> %s hehe %ls\n", "hello", s));
-	printf("Nret -> %d\n", ft_printf("nous -> %s hehe %ls", "hello", s));
+	printf("Vret -> %d\n", printf("vous -> coco et %-#-#--24O titi%#012o\n", 12, -874));
+	printf("Nret -> %d\n", ft_printf("nous -> coco et %-#-#--24O titi%#012o\n", 12, -874));
 	return (0);
-}
+}*/
