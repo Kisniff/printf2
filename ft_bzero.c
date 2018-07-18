@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/04 15:41:22 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/17 13:44:40 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/04/04 17:40:16 by sklepper          #+#    #+#             */
+/*   Updated: 2018/07/17 13:44:22 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
-	char	*ptr;
-
-	ptr = s;
-	i = 0;
-	while (i < n)
-	{
-		ptr[i] = c;
-		i++;
-	}
-	return (s);
+	ft_memset(s, 0, n);
 }

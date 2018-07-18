@@ -6,14 +6,14 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:13:59 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/09 18:14:32 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/18 15:21:17 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	fill_buff_c(t_data *data, char c)
+int		fill_buff_c(t_data *data, char c)
 {
 	if (data->ret_val == -1)
 		return (0);
@@ -22,7 +22,7 @@ int	fill_buff_c(t_data *data, char c)
 		data->buff[++data->idx] = c;
 		++data->ret_val;
 	}
-	else if (1 + data->idx > BUFF_SIZE) 
+	else if (1 + data->idx > BUFF_SIZE)
 	{
 		write(1, &data->buff, BUFF_SIZE);
 		data->idx = 0;
@@ -32,8 +32,8 @@ int	fill_buff_c(t_data *data, char c)
 	return (0);
 }
 
-int	print_str(char *str, t_data *data, const char *ptr)
-{//un putstr qui incrémente notre valeur de retour
+int		print_str(char *str, t_data *data, const char *ptr)
+{
 	int	i;
 
 	i = -1;
@@ -44,6 +44,18 @@ int	print_str(char *str, t_data *data, const char *ptr)
 		while (str[++i])
 			fill_buff_c(data, str[i]);
 	return (data->ret_val);
+}
+
+void	determine_w_len(t_data *data, wchar_t unicode)
+{
+	if (unicode < 129 || (MB_CUR_MAX == 1 && unicode <= 255))
+		data->len += 1;
+	else if (unicode < 2049)
+		data->len += 2;
+	else if (unicode < 65536)
+		data->len += 3;
+	else if (unicode < 2097152)
+		data->len += 4;
 }
 
 void	print_char(char c, t_data *data)

@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   to_base.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/17 11:46:34 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/07/17 12:36:59 by jlehideu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "ft_printf.h"
 
-char	*ft_swap_chars(char *str)
+static char	*ft_swap_chars(char *str)
 {
 	int	i;
 	int	j;
@@ -14,7 +26,7 @@ char	*ft_swap_chars(char *str)
 	return (str);
 }
 
-char *base_exception(uintmax_t nb, char *base)
+static char	*base_exception(uintmax_t nb, char *base)
 {
 	if (!base)
 		return (NULL);
@@ -23,18 +35,17 @@ char *base_exception(uintmax_t nb, char *base)
 	return (NULL);
 }
 
-char	*to_base(uintmax_t nb, char *base)
+char		*to_base(uintmax_t nb, char *base)
 {
 	intmax_t	i;
 	uintmax_t	prod;
 	uintmax_t	tmp;
 	char		*result;
 
-	//printf("nb-> %d\n");
 	if (!base || nb == 0)
 		return (base_exception(nb, base));
 	prod = (ft_strcmp(base, BASE_O) == 0) ? 8 : 16;
-	i = (nb < prod)? 1 : 0;
+	i = (nb < prod) ? 1 : 0;
 	tmp = nb;
 	while (tmp > 0)
 	{

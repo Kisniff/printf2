@@ -6,10 +6,9 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/16 15:11:19 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/18 15:21:18 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_printf.h"
 #include <stdio.h>
@@ -18,7 +17,7 @@
 #include <locale.h>
 #include <limits.h>
 
-int	printuntil(const char *str, const char *ptr, t_data *data)
+static int	printuntil(const char *str, const char *ptr, t_data *data)
 {
 	int i;
 
@@ -28,7 +27,7 @@ int	printuntil(const char *str, const char *ptr, t_data *data)
 	return (i);
 }
 
-void	init_struct(t_data *data)
+void		init_struct(t_data *data)
 {
 	int i;
 
@@ -44,17 +43,17 @@ void	init_struct(t_data *data)
 		data->length[i] = 0;
 }
 
-int	 ft_printf(const char *str, ...)
+int			ft_printf(const char *str, ...)
 {
-	va_list		pointerlst;
-	char 		*ptr;
+	va_list	pointerlst;
+	char	*ptr;
 	int		i;
-	t_data		data;
+	t_data	data;
 
 	va_start(pointerlst, str);
 	init_struct(&data);
 	data.ret_val = 0;
-	data.idx = -1;
+		data.idx = -1;
 	while ((ptr = ft_strchr(str, '%')) != NULL)
 	{
 		init_struct(&data);
@@ -63,6 +62,10 @@ int	 ft_printf(const char *str, ...)
 		while (ptr && (i = path(ptr, pointerlst, &data)) > 0)
 			ptr += i;
 		str = ptr + 1;
+		if (data.ret_val > 0)
+			write(1, &data.buff, ++data.idx);
+		ft_memset(data.buff, '\0', BUFF_SIZE);
+		data.idx = -1;
 	}
 	printuntil(str, ptr, &data);
 	if (data.ret_val > -1)
@@ -70,17 +73,17 @@ int	 ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-
-
+/*
 int main(void)
-{//fix two commented codes@
+{//modifier le parser pour erreur quand precision ou width >= 2147483640
 	int	i;
-	int ret;
+	int	ret;
+	wchar_t s[3];
 
-	i = -987;
-	ret = printf("Vous : %053d\n", i);
-	printf("Vret : %d\n", ret);
-	ret = ft_printf("Nous : %053d\n", i);
-	printf("Nret : %d\n", ret);
+	s[0] = 'a';
+	s[1] = 0x11ffff;
+	s[2] = '\0';
+	printf("Vret -> %d\n", printf("vous -> coco et %-#-#--24O titi%#012o\n", 12, -874));
+	printf("Nret -> %d\n", ft_printf("nous -> coco et %-#-#--24O titi%#012o\n", 12, -874));
 	return (0);
-}
+}*/
