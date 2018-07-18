@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:01:47 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/10 17:26:46 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/14 17:52:35 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int		length(const char *ptr, t_data *data)
 
 int		conversion(const char *ptr, va_list param, t_data *data)
 {
-	printf("data flag l -> %d\n", data->flags[L]);
-	if (*ptr == 'S' || (*ptr == 's' && data->flags[L] == 1))
+	if (*ptr == 'S' || (*ptr == 's' && data->length[L] == 1))
 	{
 		printf("S\n");
 		pick_f_bigs(param, data);
@@ -77,19 +76,19 @@ int		conversion(const char *ptr, va_list param, t_data *data)
 	else if (*ptr == 's')
 	{
 		printf("s\n");
-		pick_f_s(param, data, ptr);
+		pick_f_s(param, data);
 	}
 	else if (*ptr == 'p')
 		pick_f_p(param, data, ptr);
 	else if (*ptr == 'd' || *ptr == 'i' || *ptr == 'D')
-		int_param(param);
+		pick_f_d(param, data);
 	else if (*ptr == 'o' || *ptr == 'O')
 		pick_f_base(param, data, ptr);
 	else if (*ptr == 'u' || *ptr == 'U')
 	{
 		if (*ptr == 'U')
 			data->length[L] = (data->length[L] == 0) ? 1 : data->length[L];
-		pick_f_u(param, data, ptr);
+		pick_f_u(param, data);
 	}
 	else if (*ptr == 'x' || *ptr == 'X')
 		pick_f_base(param, data, ptr);

@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/10 17:54:28 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/14 17:27:43 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@
 struct s_data
 {
 	char		buff[BUFF_SIZE];
-	int		flags[5];
-	int		length[5];
-	int		precision;
-	int		width;
-	int		zero;
-	int		ret_val;
+	int			flags[5];
+	int			length[5];
+	int			precision;
+	int			width;
+	int			zero;
+	int			ret_val;
 	uintmax_t	len;
-	int		idx;
+	int			idx;
+	int			sign;
 };
 
 typedef struct s_data	t_data;
@@ -73,13 +74,18 @@ int	print_str(char *str, t_data *data, const char *ptr);
 void	print_char(char c, t_data *data);
 int	width_min(const char *ptr, t_data *data);
 char	*to_base(uintmax_t nb, char *base);
-int	pick_f_u(va_list param, t_data *data, const char *ptr);
+int	pick_f_u(va_list param, t_data *data);
 int	pick_f_base(va_list param, t_data *data, const char *ptr);
 int	pick_f_c(va_list param, t_data *data);
 int	pick_f_w(t_data *data, va_list param);
 int	pick_f_percent(va_list param, t_data *data);
 int	pick_f_bigs(va_list param, t_data *data);
-int	pick_f_s(va_list param, t_data *data, const char *str);
+int	pick_f_s(va_list param, t_data *data);
+int	pick_f_d(va_list param, t_data *data);
+int	ft_long(va_list param, t_data *data, const char *ptr);
+int	ft_long_long(va_list param, t_data *data, const char *ptr);
+int	ft_short(va_list param, t_data *data, const char *ptr);
+int	ft_signed_char(va_list param, t_data *data, const char *ptr);
 int	f_precision(t_data *data);
 int	f_zero(t_data *data);
 int	f_width(t_data *data);
@@ -98,7 +104,7 @@ int	write_str(t_data *data, char *str);
 int	write_w(t_data *data, wchar_t unicode);
 void	determine_w_len(t_data *data, wchar_t unicode);
 int	f_width_p(t_data *data);
-
-
+char			*ft_itoa_long(long long n);
+int	ft_isneg(long long n);
 
 #endif

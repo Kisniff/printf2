@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/10 17:32:49 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/16 15:11:19 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_struct(t_data *data)
 	data->precision = 0;
 	data->width = 0;
 	data->len = 0;
+	data->sign = 0;
 	i = -1;
 	while (++i <= 4)
 		data->flags[i] = 0;
@@ -51,8 +52,6 @@ int	 ft_printf(const char *str, ...)
 	t_data		data;
 
 	va_start(pointerlst, str);
-	//if (check(str) == -1)
-	//	return (-1);
 	init_struct(&data);
 	data.ret_val = 0;
 	data.idx = -1;
@@ -75,20 +74,13 @@ int	 ft_printf(const char *str, ...)
 
 int main(void)
 {//fix two commented codes@
-//fail 0095
 	int	i;
-	int	ret;
-	int	fd;
-	wchar_t	s[4];
+	int ret;
 
-	setlocale(LC_ALL, "");
-	i = 55295;
-	s[0] = 0x53;
-	s[1] = 0x3abc;
-	s[2] = 0x81000;
-	s[3] = '\0';
-	printf("Vret -> %d\n", printf("vous -> %.5ls", s));
-	printf("Nret -> %d\n", ft_printf("nous -> %.5ls", s));
-//	printf("Nret -> %d\n", ft_printf("nous -> %C\n", 1179647));
+	i = -987;
+	ret = printf("Vous : %053d\n", i);
+	printf("Vret : %d\n", ret);
+	ret = ft_printf("Nous : %053d\n", i);
+	printf("Nret : %d\n", ret);
 	return (0);
 }

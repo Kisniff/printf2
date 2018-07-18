@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   digits_precision.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/16 14:57:36 by sklepper          #+#    #+#             */
+/*   Updated: 2018/07/16 15:02:35 by sam              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdio.h>
 
@@ -31,7 +43,7 @@ int	f_width(t_data *data)
 	int	precision;
 
 	precision = (data->precision > 0) ? data->precision : 0;
-	width = (int)(data->width - (data->len + precision));
+	width = (int)(data->width - (data->len + precision + data ->sign));
 	if (width > 0)
 		while (--width >= 0)
 			fill_buff_c(data, ' ');
@@ -41,7 +53,6 @@ int	f_width(t_data *data)
 int	f_width_p(t_data *data)
 {
 	int	width;
-	int	precision;
 
 	width = (int)(data->width - data->len);
 	if (width > 0)
