@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/18 15:28:28 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/18 17:49:20 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef struct	s_data
 	char		buff[BUFF_SIZE];
 	int			flags[5];
 	int			length[5];
-	int			precision;
+	intmax_t	precision;
 	int			width;
 	int			zero;
 	int			ret_val;
-	uintmax_t	len;
+	intmax_t	len;
 	int			idx;
 	int			sign;
 }				t_data;
@@ -72,13 +72,13 @@ int				print_str(char *str, t_data *data, const char *ptr);
 void			print_char(char c, t_data *data);
 int				width_min(const char *ptr, t_data *data);
 char			*to_base(uintmax_t nb, char *base);
-int				pick_f_u(va_list param, t_data *data, const char *ptr);
+int				pick_f_u(va_list param, t_data *data);
 int				pick_f_base(va_list param, t_data *data, const char *ptr);
 int				pick_f_c(va_list param, t_data *data);
 int				pick_f_w(t_data *data, va_list param);
 int				pick_f_percent(va_list param, t_data *data);
 int				pick_f_bigs(va_list param, t_data *data);
-int				pick_f_s(va_list param, t_data *data, const char *str);
+int				pick_f_s(va_list param, t_data *data);
 int				pick_f_d(va_list param, t_data *data);
 int				f_precision(t_data *data);
 int				f_zero(t_data *data);
@@ -100,7 +100,7 @@ int				write_str(t_data *data, char *str);
 int				write_w(t_data *data, wchar_t unicode);
 void			determine_w_len(t_data *data, wchar_t unicode);
 int				f_width_p(t_data *data);
-int				exception_zero_x(char *result, t_data *data, const char *ptr);
+int				exception_zero_x(t_data *data, const char *ptr);
 int				exception_bigs(t_data *data, char *ptr);
 int				exception_zero_u(t_data *data);
 char			*ft_itoa_long(long long n);

@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:08:46 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/16 18:39:08 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/18 17:44:31 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			write_str(t_data *data, char *str)
 	int	i;
 
 	i = -1;
-	while (++i < data->len)
+	while ((intmax_t)++i < data->len)
 		fill_buff_c(data, str[i]);
 	return (0);
 }
@@ -57,7 +57,7 @@ static int	pick_f_s_2(char *str, t_data *data)
 	return (0);
 }
 
-int			pick_f_s(va_list param, t_data *data, const char *ptr)
+int			pick_f_s(va_list param, t_data *data)
 {
 	char	*str;
 	int		i;

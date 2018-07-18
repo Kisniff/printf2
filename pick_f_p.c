@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:22:24 by sklepper          #+#    #+#             */
-/*   Updated: 2018/06/20 16:47:56 by sklepper         ###   ########.fr       */
+/*   Updated: 2018/07/18 17:45:43 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		pick_f_p(va_list param, t_data *data, const char *ptr)
 
 	nb = va_arg(param, uintptr_t);
 	result = address(nb, BASE_H);
-	if (data->precision > -1 && ft_strlen(result) < (data->precision))
+	if (data->precision > -1 && (intmax_t)ft_strlen(result) < (data->precision))
 		str = ft_strnew(data->precision + 2);
 	else
 		str = ft_strnew(ft_strlen(result + 2));

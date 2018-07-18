@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:01:47 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/18 15:21:18 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/18 17:46:50 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		conversion(const char *ptr, va_list param, t_data *data)
 	if (*ptr == 'S' || (*ptr == 's' && data->length[L] == 1))
 		pick_f_bigs(param, data);
 	else if (*ptr == 's')
-		pick_f_s(param, data, ptr);
+		pick_f_s(param, data);
 	else if (*ptr == 'p')
 		pick_f_p(param, data, ptr);
 	else if (*ptr == 'd' || *ptr == 'i' || *ptr == 'D')
@@ -82,7 +82,7 @@ int		conversion(const char *ptr, va_list param, t_data *data)
 	{
 		if (*ptr == 'U')
 			data->length[L] = (data->length[L] == 0) ? 1 : data->length[L];
-		pick_f_u(param, data, ptr);
+		pick_f_u(param, data);
 	}
 	else if (*ptr == 'x' || *ptr == 'X')
 		pick_f_base(param, data, ptr);

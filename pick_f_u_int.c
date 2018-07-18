@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/17 11:36:29 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/18 17:47:02 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int			pick_f_u_2(t_data *data, uintmax_t nb, int prec)
 	return (0);
 }
 
-int					pick_f_u(va_list param, t_data *data, const char *ptr)
+int					pick_f_u(va_list param, t_data *data)
 {
 	uintmax_t	nb;
 	int			prec;

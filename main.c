@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/18 15:21:18 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/18 17:36:17 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,9 @@ int			ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-/*
+
 int main(void)
 {//modifier le parser pour erreur quand precision ou width >= 2147483640
-	int	i;
-	int	ret;
 	wchar_t s[3];
 
 	s[0] = 'a';
@@ -86,4 +84,4 @@ int main(void)
 	printf("Vret -> %d\n", printf("vous -> coco et %-#-#--24O titi%#012o\n", 12, -874));
 	printf("Nret -> %d\n", ft_printf("nous -> coco et %-#-#--24O titi%#012o\n", 12, -874));
 	return (0);
-}*/
+}

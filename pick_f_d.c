@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 15:13:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/16 15:17:31 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/18 17:14:53 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int		ft_int(t_data *data, long long n)
 	data->len = ft_strlen(str);
 	data->precision = (int)(data->precision - data->len);
 	if (data->flags[MINUS] == 0)
+	{
 		if (data->flags[ZERO] == 0)
 			f_width(data);
 		else
@@ -48,6 +49,7 @@ static int		ft_int(t_data *data, long long n)
 			sign_d(data, neg);
 			f_zero(data);
 		}
+	}
 	if ((data->flags[PLUS] == 1 || neg == 1) && data->flags[ZERO] == 0)
 		sign_d(data, neg);
 	f_precision(data);

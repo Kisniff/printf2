@@ -6,7 +6,7 @@
 #    By: jlehideu <jlehideu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 10:23:16 by jlehideu          #+#    #+#              #
-#    Updated: 2018/07/18 16:25:14 by sam              ###   ########.fr        #
+#    Updated: 2018/07/18 17:36:06 by jlehideu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,9 +62,12 @@ all: $(NAME)
 $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ) 
 
-yo: 	$(OBJ)
-	@gcc $(FLAGS) -fsanitize=address -g -o $(NAMEN)  $(OBJ) -lft -L./libft/.
-	@rm -f $(OBJ)
+yo:		$(OBJ)
+	gcc $(FLAGS) -g -o $(NAMEN) $(OBJ) 
+	rm -f $(OBJ)
+
+%.o: %.c
+	@gcc -c $(FLAGS) $<
 
 clean:
 	rm -f $(OBJ)
