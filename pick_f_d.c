@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 15:13:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/19 14:29:34 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/19 16:20:43 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	sign_d(t_data *data, int sign)
 
 	s[0] = '+';
 	s[1] = '-';
-	if (data->flags[SPACE] == 1 && data->flags[MINUS] == 0)
+	if (data->flags[SPACE] == 1 && data->flags[PLUS] == 0)
 	{
 		s[0] = ' ';
 		s[1] = '-';
@@ -49,7 +49,7 @@ static void		flags_d(t_data *data, int neg, char *str, long long n)
 		f_zero(data);
 	}
 	if ((data->flags[PLUS] == 1 || neg == 1 || data->flags[SPACE] == 1)
-		&& (data->flags[ZERO] == 0|| data->precision != 0))
+		&& (data->flags[ZERO] == 0|| data->precision != 0 || data->flags[MINUS] == 1))
 		sign_d(data, neg);
 	f_precision(data);
 	if (n != 0 || tmp != -1)
@@ -68,7 +68,8 @@ static int		ft_int(t_data *data, long long n)
 	else
 		str = ft_itoa_long(n);
 	neg = ft_isneg(n);
-	data->len = ft_strlen(str);
+	if (n != 0 || data->precision != -1)
+		data->len = ft_strlen(str);
 	flags_d(data, neg, str, n);
 	free(str);
 	return (0);
@@ -86,8 +87,10 @@ int			pick_f_d(va_list param, t_data *data, const char *ptr)
 		n = (short)va_arg(param, int);
 	else if (data->length[H] == 2)
 		n = (signed char)va_arg(param, int);
-	else if (*ptr == 'D')
+	else if (*ptr == 'D' || data->length[J] == 1)
 		n = va_arg(param, intmax_t);
+	else if (data->length[Z] == 1)
+		n = va_arg(param, size_t);
 	else
 		n = va_arg(param, int);
 	ft_int(data, n);

@@ -6,18 +6,18 @@
 /*   By: sklepper <sklepperstudent.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 17:13:31 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/14 17:15:55 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/19 16:14:50 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_isneg(long long n)
+int								ft_isneg(long long n)
 {
 	return (n < 0 ? 1 : 0);
 }
 
-static size_t	ft_count_nbr(long long n)
+static size_t					ft_count_nbr(long long n)
 {
 	size_t	i;
 
@@ -30,16 +30,16 @@ static size_t	ft_count_nbr(long long n)
 	return (i);
 }
 
-static long long		ft_nbchar(size_t i, long long nbr)
+static unsigned long long		ft_nbchar(size_t i, long long nbr)
 {
 	long long		base;
-	long long	n;
+	unsigned long long	n;
 
 	base = 10;
 	if (nbr < 0)
-		n = -nbr;
+		n = (unsigned long long)-nbr;
 	else
-		n = nbr;
+		n = (unsigned long long)nbr;
 	if (i == 1)
 		base = 1;
 	while (i > 2)
@@ -51,12 +51,12 @@ static long long		ft_nbchar(size_t i, long long nbr)
 	return (n);
 }
 
-char			*ft_itoa_long(long long n)
+char							*ft_itoa_long(long long n)
 {
 	size_t	size;
 	char	*str;
 	int		i;
-	long long		nbr;
+	unsigned long long		nbr;
 
 	i = -1;
 	size = 1;
@@ -68,8 +68,6 @@ char			*ft_itoa_long(long long n)
 		str[0] = '0';
 		return (str);
 	}
-	if (n < 0)
-		str[++i] = '-';
 	while (--size != 0)
 	{
 		nbr = ft_nbchar(size, n);

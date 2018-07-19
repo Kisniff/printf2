@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/19 15:23:01 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/19 16:23:54 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ int			ft_printf(const char *str, ...)
 int main(void)
 {//modifier le parser pour erreur quand precision ou width >= 2147483640
 	int ret;
-	ft_printf("%----24p et hello %2p %12p", &ret, &main, NULL);
-	printf("%----24p et hello %2p %12p", &ret, &main, NULL);
-	ft_printf("%d\n", 0);
-	printf("%d\n", 0);
+	ft_printf("%5.d %5.0d\n", 0, 0);
+	printf("%5.d %5.0d\n", 0, 0);
 	return (0);
 }
 */
