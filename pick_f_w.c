@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:09:32 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/17 11:34:44 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/18 17:30:25 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	write_quadruple(wchar_t unicode, t_data *data)
 
 	if (!(str = ft_strnew(4)))
 		return ;
-	str[0] = (unicode >> 18) + 0xf0;
-	str[1] = (unicode >> 12 & 0x3f) + 0x80;
-	str[2] = (unicode >> 6 & 0x3f) + 0x80;
-	str[3] = (unicode & 0x3f) + 0x80;
+	str[0] = (char)(unicode >> 18) + 0xf0;
+	str[1] = (char)(unicode >> 12 & 0x3f) + 0x80;
+	str[2] = (char)(unicode >> 6 & 0x3f) + 0x80;
+	str[3] = (char)(unicode & 0x3f) + 0x80;
 	fill_buff_c(data, str[0]);
 	fill_buff_c(data, str[1]);
 	fill_buff_c(data, str[2]);
@@ -36,9 +36,9 @@ static void	write_triple(wchar_t unicode, t_data *data)
 
 	if (!(str = ft_strnew(3)))
 		return ;
-	str[0] = (unicode >> 12) + 0xe0;
-	str[1] = (unicode >> 6 & 0x3f) + 0x80;
-	str[2] = (unicode & 0x3f) + 0x80;
+	str[0] = (char)(unicode >> 12) + 0xe0;
+	str[1] = (char)(unicode >> 6 & 0x3f) + 0x80;
+	str[2] = (char)(unicode & 0x3f) + 0x80;
 	fill_buff_c(data, str[0]);
 	fill_buff_c(data, str[1]);
 	fill_buff_c(data, str[2]);
@@ -51,8 +51,8 @@ static void	write_double(wchar_t unicode, t_data *data)
 
 	if (!(str = ft_strnew(2)))
 		return ;
-	str[0] = (unicode >> 6) + 0xc0;
-	str[1] = (unicode & 0x3f) + 0x80;
+	str[0] = (char)(unicode >> 6) + 0xc0;
+	str[1] = (char)(unicode & 0x3f) + 0x80;
 	fill_buff_c(data, str[0]);
 	fill_buff_c(data, str[1]);
 	ft_strdel(&str);
@@ -61,7 +61,7 @@ static void	write_double(wchar_t unicode, t_data *data)
 int			write_w(t_data *data, wchar_t unicode)
 {
 	if (unicode < 129)
-		fill_buff_c(data, unicode);
+		fill_buff_c(data, (char)unicode);
 	else if (unicode < 2049)
 		write_double(unicode, data);
 	else if (unicode < 65536)

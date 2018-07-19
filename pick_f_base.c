@@ -6,14 +6,14 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/17 11:45:07 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/18 17:50:21 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_printf.h"
 
-static int	f_x_sharp(t_data *data, const char *ptr, char *result)
+static int	f_x_sharp(t_data *data, const char *ptr)
 {
 	if (data->flags[SHARP] > 0 && *ptr == 'x')
 		print_str("0x", data, "z");
@@ -24,7 +24,7 @@ static int	f_x_sharp(t_data *data, const char *ptr, char *result)
 	return (0);
 }
 
-static char	*determine_xo_call_two(const char *ptr, t_data *data, uintmax_t tmp)
+static char	*determine_xo_call_two(const char *ptr, uintmax_t tmp)
 {
 	if (*ptr == 'x')
 		return (to_base(tmp, BASE_H));
@@ -38,7 +38,6 @@ static char	*determine_xo_call_two(const char *ptr, t_data *data, uintmax_t tmp)
 
 static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 {
-	char		*result;
 	uintmax_t	tmp;
 
 	if (data->length[H] > 1)
@@ -59,9 +58,9 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 		if (tmp > 4294967295)
 			tmp = (4294967296 - tmp) * -1;
 	}
-	else if (*ptr == 'O')
+	else
 		tmp = va_arg(param, uintmax_t);
-	return (determine_xo_call_two(ptr, data, tmp));
+	return (determine_xo_call_two(ptr, tmp));
 }
 
 static int	pick_f_x_two(char *result, t_data *data, const char *ptr)
@@ -69,25 +68,25 @@ static int	pick_f_x_two(char *result, t_data *data, const char *ptr)
 	if (data->precision > 0)
 	{
 		f_width(data);
-		f_x_sharp(data, ptr, result);
+		f_x_sharp(data, ptr);
 		f_precision(data);
 		print_str(result, data, "z");
 	}
 	else if (data->flags[ZERO])
 	{
-		f_x_sharp(data, ptr, result);
+		f_x_sharp(data, ptr);
 		f_zero(data);
 		print_str(result, data, "z");
 	}
 	else if (data->width > 0)
 	{
 		f_width(data);
-		f_x_sharp(data, ptr, result);
+		f_x_sharp(data, ptr);
 		print_str(result, data, "z");
 	}
 	else
 	{
-		f_x_sharp(data, ptr, result);
+		f_x_sharp(data, ptr);
 		print_str(result, data, "z");
 	}
 	return (0);
@@ -101,7 +100,7 @@ int			pick_f_base(va_list param, t_data *data, const char *ptr)
 	data->len = (result != NULL) ? ft_strlen(result) : 0;
 	data->flags[ZERO] = (data->precision == 0) ? data->flags[ZERO] : 0;
 	if (data->len == 1 && *result == '0')
-		return (exception_zero_x(result, data, ptr));
+		return (exception_zero_x(data, ptr));
 	data->width = (data->flags[SHARP] && (*ptr == 'x' || *ptr == 'X')) ?
 		data->width - 2 : data->width;
 	data->len = (data->flags[SHARP] && (*ptr == 'o' || *ptr == 'O')) ?
@@ -111,7 +110,7 @@ int			pick_f_base(va_list param, t_data *data, const char *ptr)
 			data->precision - data->len : 0;
 	if (data->flags[MINUS])
 	{
-		f_x_sharp(data, ptr, result);
+		f_x_sharp(data, ptr);
 		f_precision(data);
 		print_str(result, data, "z");
 		f_width(data);

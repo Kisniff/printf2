@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 11:55:27 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/19 12:44:47 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/19 13:38:30 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	f_width(t_data *data)
 	int	width;
 	int	precision;
 
-	precision = (data->precision > 0) ? data->precision : 0;
+	precision = (data->precision > 0) ? (int)data->precision : 0;
 	width = (int)(data->width - (data->len + precision + data->sign));
 	if (width > 0)
 		while (--width >= 0)

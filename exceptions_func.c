@@ -6,13 +6,13 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 17:52:57 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/17 11:54:49 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/18 17:46:19 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	exception_zero_x(char *result, t_data *data, const char *ptr)
+int	exception_zero_x(t_data *data, const char *ptr)
 {
 	data->len = 0;
 	data->flags[SHARP] = (data->flags[ZERO] > 0) ? 0 : data->flags[SHARP];
