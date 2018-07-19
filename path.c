@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:01:47 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/18 17:46:50 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/19 13:38:30 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		conversion(const char *ptr, va_list param, t_data *data)
 	else if (*ptr == 'p')
 		pick_f_p(param, data, ptr);
 	else if (*ptr == 'd' || *ptr == 'i' || *ptr == 'D')
-		pick_f_d(param, data);
+		pick_f_d(param, data, ptr);
 	else if (*ptr == 'o' || *ptr == 'O')
 		pick_f_base(param, data, ptr);
 	else if (*ptr == 'u' || *ptr == 'U')

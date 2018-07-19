@@ -6,7 +6,7 @@
 #    By: jlehideu <jlehideu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 10:23:16 by jlehideu          #+#    #+#              #
-#    Updated: 2018/07/18 17:36:06 by jlehideu         ###   ########.fr        #
+#    Updated: 2018/07/19 13:38:29 by sam              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,8 @@ SRC = main.c \
       pick_f_p.c \
       pick_f_d.c \
       toolbox.c \
-	  exceptions_func.c \
-	  ft_bzero.c
+      exceptions_func.c \
+      ft_bzero.c
 
 OBJ = $(SRC:.c=.o) 
 

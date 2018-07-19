@@ -3,7 +3,7 @@ project(ft_printf C)
 
 set(CMAKE_C_STANDARD 99)
 
-set(CMAKE_C_FLAGS  "-Wall -Wextra -Werror")
+#set(CMAKE_C_FLAGS  "-Wall -Wextra -Werror")
 add_executable(ft_printf
         main.c
         ft_printf.h
@@ -15,7 +15,7 @@ add_executable(ft_printf
         exceptions_func.c
         precision.c
         digits_precision.c
-        digits_precision.c
+        digits_precision_spec.c
         pick_f_base.c
         pick_f_bigs.c
         pick_f_u_int.c
@@ -26,8 +26,5 @@ add_executable(ft_printf
         pick_f_s.c
         pick_f_w.c
         to_base.c
-        toolbox.c
-        Checker/check.c
-        Checker/path_check.c
-        Checker/conversion_check.c)
-target_link_libraries(ft_printf "~/dev/ft_printf/libft/libft.a")
+        toolbox.c)
+target_link_libraries(ft_printf "~/dev/printf2/libft/libft.a")

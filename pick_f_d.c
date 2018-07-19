@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 15:13:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/19 13:38:30 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/19 14:29:34 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	sign_d(t_data *data, int sign)
 		s[1] = '-';
 	}
 	if (data->width > data->precision + (int)data->len
-		&& data->flags[MINUS] == 0 && data->idx >= 0)
+		&& data->flags[MINUS] == 0 && data->idx >= 0 &&
+		(data->flags[ZERO] == 0|| data->precision != 0))
 		data->buff[data->idx] = s[sign];
 	else
 	{
@@ -33,20 +34,26 @@ static void	sign_d(t_data *data, int sign)
 	}
 }
 
-static void		flags_d(t_data *data, int neg, char *str)
+static void		flags_d(t_data *data, int neg, char *str, long long n)
 {
-	if (data->flags[MINUS] == 0 && data->flags[ZERO] == 0)
+	intmax_t	tmp;
+
+	tmp = data->precision;
+	data->precision = (data->precision > (int)data->len) ? (int)(data->precision - data->len) : 0;
+	if (data->flags[MINUS] == 0 && (data->flags[ZERO] == 0 || data->precision != 0))
 		f_width(data);
-	else if (data->flags[ZERO] == 1 && data->flags[MINUS] == 0)
+	else if (data->flags[ZERO] == 1 && data->flags[MINUS] == 0 && data->precision == 0)
 	{
 		if ((data->flags[PLUS] == 1 || neg == 1 || data->flags[SPACE] == 1))
 			sign_d(data, neg);
 		f_zero(data);
 	}
-	if ((data->flags[PLUS] == 1 || neg == 1 || data->flags[SPACE] == 1) && data->flags[ZERO] == 0)
+	if ((data->flags[PLUS] == 1 || neg == 1 || data->flags[SPACE] == 1)
+		&& (data->flags[ZERO] == 0|| data->precision != 0))
 		sign_d(data, neg);
 	f_precision(data);
-	write_str(data, str);
+	if (n != 0 || tmp != -1)
+		write_str(data, str);
 	if (data->flags[MINUS] == 1)
 		f_width(data);
 }
@@ -62,13 +69,12 @@ static int		ft_int(t_data *data, long long n)
 		str = ft_itoa_long(n);
 	neg = ft_isneg(n);
 	data->len = ft_strlen(str);
-	data->precision = (data->precision > (int)data->len) ? (int)(data->precision - data->len) : 0;
-	flags_d(data, neg, str);
+	flags_d(data, neg, str, n);
 	free(str);
 	return (0);
 }
 
-int			pick_f_d(va_list param, t_data *data)
+int			pick_f_d(va_list param, t_data *data, const char *ptr)
 {
 	long long n;
 
@@ -80,6 +86,8 @@ int			pick_f_d(va_list param, t_data *data)
 		n = (short)va_arg(param, int);
 	else if (data->length[H] == 2)
 		n = (signed char)va_arg(param, int);
+	else if (*ptr == 'D')
+		n = va_arg(param, intmax_t);
 	else
 		n = va_arg(param, int);
 	ft_int(data, n);
