@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/18 17:50:21 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/20 09:41:24 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	pick_f_x_two(char *result, t_data *data, const char *ptr)
 }
 
 int			pick_f_base(va_list param, t_data *data, const char *ptr)
-{//comportement indéfini precision et largeur = int max
+{
 	char	*result;
 
 	result = determine_xo_call(ptr, param, data);

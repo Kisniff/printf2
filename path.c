@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 16:01:47 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/19 13:38:30 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/20 11:32:59 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ int		conversion(const char *ptr, va_list param, t_data *data)
 		pick_f_c(param, data);
 	else if (*ptr == '%')
 		pick_f_percent(param, data);
+	else
+		fill_buff_c(data, *ptr);
 	return (0);
 }

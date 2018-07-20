@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:13:59 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/18 15:21:17 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/20 11:33:06 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		fill_buff_c(t_data *data, char c)
 	{
 		write(1, &data->buff, BUFF_SIZE);
 		data->idx = 0;
-		ft_memset(data->buff, '\0', BUFF_SIZE);
 		fill_buff_c(data, c);
 	}
 	return (0);
