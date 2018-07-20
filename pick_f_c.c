@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:08:58 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/09 16:09:02 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/20 12:01:17 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	pick_f_c(va_list param, t_data *data)
 	{
 		print_char(result, data);
 		f_width(data);
+	}
+	else if (data->flags[ZERO])
+	{
+		f_zero(data);
+		print_char(result, data);
 	}
 	else if (data->width)
 	{
