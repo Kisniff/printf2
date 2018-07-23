@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 17:22:24 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/19 15:26:17 by sam              ###   ########.fr       */
+/*   Updated: 2018/07/23 15:00:25 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,30 +70,46 @@ static char	*add_char(char *str, char *result, int precision)
 	return (str);
 }
 
-int		pick_f_p(va_list param, t_data *data, const char *ptr)
+static char	*manipulation(uintptr_t nb, t_data *data, char *str)
 {
 	char *result;
+
+	result = address(nb, BASE_H);
+	if (data->precision > 0 && (intmax_t)ft_strlen(result) < (data->precision))
+	{
+		if (!(str = ft_strnew((size_t)data->precision + 2)))
+			return (NULL);
+
+	}
+	else
+		if (!(str = ft_strnew(ft_strlen(result + 2))))
+			return (NULL);
+	str = initstr(str);
+	if (nb > 0 || data->precision != 0)
+		str = add_char(str, result, (int)data->precision + 2);
+	else if (data->width > 0 && data->flags[ZERO] == 1)
+		str = add_char(str, result, data->width);
+	data->len = ft_strlen(str);
+	if (data->width > 0 && data->flags[MINUS] == 0)
+		f_width_p(data, nb);
+	if (data->precision == -1 && nb == 0)
+		data->len = 2;
+	ft_strdel(&result);
+	return (str);
+}
+
+int		pick_f_p(va_list param, t_data *data, const char *ptr)
+{
 	char *str;
 	uintptr_t nb;
 
 	nb = va_arg(param, uintptr_t);
-	result = address(nb, BASE_H);
-	if (data->precision > -1 && (intmax_t)ft_strlen(result) < (data->precision))
-		str = ft_strnew((size_t)data->precision + 2);
-	else
-		str = ft_strnew(ft_strlen(result + 2));
-	str = initstr(str);
-	if (nb > 0 || data->precision != 0)
-		str = add_char(str, result, (int)data->precision + 2);
-	data->len = ft_strlen(str);
-	if (data->width > 0 && data->flags[MINUS] == 0)
-		f_width_p(data, nb);
+	str = manipulation(nb, data, str);
 	print_str(str, data, "s");
-	if (nb == 0)
+	if (nb == 0 && data->precision == 0 && (data->width == 0 || data->flags[ZERO] == 0))
 		print_str("0", data, ptr);
 	if (data->flags[MINUS] == 1)
 		f_width_p(data, nb);
-	ft_strdel(&result);
 	ft_strdel(&str);
 	return (0);
 }

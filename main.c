@@ -6,7 +6,7 @@
 /*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/20 12:00:55 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/23 14:59:36 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,8 @@ int			ft_printf(const char *str, ...)
 /*
 int main(void)
 {//modifier le parser pour erreur quand precision ou width >= 2147483640
-	int ret;
-	ret = 0;
-	printf("Nret -> %d\n", ft_printf("nous -> {%03c}", 0));
-	printf("Vret -> %d\n", printf("vous -> {%03c}", 0));
+	ft_printf("%5p\n", 0);
+	printf("%5p\n", 0);
 	return (0);
 }
 */
