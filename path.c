@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/31 16:01:47 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/20 11:32:59 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/23 16:05:48 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/07/23 16:05:50 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,28 @@ int		length(const char *ptr, t_data *data)
 int		conversion(const char *ptr, va_list param, t_data *data)
 {
 	if (*ptr == 'S' || (*ptr == 's' && data->length[L] == 1))
-		pick_f_bigs(param, data);
+		return (pick_f_bigs(param, data));
 	else if (*ptr == 's')
-		pick_f_s(param, data);
+		return (pick_f_s(param, data));
 	else if (*ptr == 'p')
-		pick_f_p(param, data, ptr);
+		return (pick_f_p(param, data, ptr));
 	else if (*ptr == 'd' || *ptr == 'i' || *ptr == 'D')
-		pick_f_d(param, data, ptr);
+		return (pick_f_d(param, data, ptr));
 	else if (*ptr == 'o' || *ptr == 'O')
-		pick_f_base(param, data, ptr);
+		return (pick_f_base(param, data, ptr));
 	else if (*ptr == 'u' || *ptr == 'U')
 	{
 		if (*ptr == 'U')
 			data->length[L] = (data->length[L] == 0) ? 1 : data->length[L];
-		pick_f_u(param, data);
+		return (pick_f_u(param, data));
 	}
 	else if (*ptr == 'x' || *ptr == 'X')
-		pick_f_base(param, data, ptr);
+		return (pick_f_base(param, data, ptr));
 	else if ((*ptr == 'c' && data->length[L] == 1) || *ptr == 'C')
-		pick_f_w(data, param);
+		return (pick_f_w(data, param));
 	else if (*ptr == 'c')
-		pick_f_c(param, data);
+		return (pick_f_c(param, data, *ptr));
 	else if (*ptr == '%')
-		pick_f_percent(param, data);
-	else
-		fill_buff_c(data, *ptr);
-	return (0);
+		return (pick_f_percent(param, data));
+	return (pick_f_c(param, data, *ptr));
 }

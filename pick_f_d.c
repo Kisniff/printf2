@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pick_f_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 15:13:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/23 14:15:29 by sam              ###   ########.fr       */
+/*   Created: 2018/07/23 14:54:03 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/07/23 16:06:33 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	sign_d(t_data *data, int sign)
+static void		sign_d(t_data *data, int sign)
 {
 	char s[2];
 
@@ -25,7 +25,7 @@ static void	sign_d(t_data *data, int sign)
 	}
 	if (data->width > data->precision + (int)data->len
 		&& data->flags[MINUS] == 0 && data->idx >= 0 &&
-		(data->flags[ZERO] == 0|| data->precision != 0))
+		(data->flags[ZERO] == 0 || data->precision != 0))
 		data->buff[data->idx] = s[sign];
 	else
 	{
@@ -39,17 +39,21 @@ static void		flags_d(t_data *data, int neg, char *str, long long n)
 	intmax_t	tmp;
 
 	tmp = data->precision;
-	data->precision = (data->precision > (int)data->len) ? (int)(data->precision - data->len) : 0;
-	if (data->flags[MINUS] == 0 && (data->flags[ZERO] == 0 || data->precision != 0))
+	data->precision = (data->precision > (int)data->len) ?
+		(int)(data->precision - data->len) : 0;
+	if (data->flags[MINUS] == 0 && (data->flags[ZERO] == 0 ||
+				data->precision != 0))
 		f_width(data);
-	else if (data->flags[ZERO] == 1 && data->flags[MINUS] == 0 && data->precision == 0)
+	else if (data->flags[ZERO] == 1 && data->flags[MINUS] == 0 &&
+			data->precision == 0)
 	{
 		if ((data->flags[PLUS] == 1 || neg == 1 || data->flags[SPACE] == 1))
 			sign_d(data, neg);
 		f_zero(data);
 	}
 	if ((data->flags[PLUS] == 1 || neg == 1 || data->flags[SPACE] == 1)
-		&& (data->flags[ZERO] == 0|| data->precision != 0 || data->flags[MINUS] == 1))
+		&& (data->flags[ZERO] == 0 || data->precision != 0 ||
+			data->flags[MINUS] == 1))
 		sign_d(data, neg);
 	f_precision(data);
 	if (n != 0 || tmp != -1)
@@ -60,8 +64,8 @@ static void		flags_d(t_data *data, int neg, char *str, long long n)
 
 static int		ft_int(t_data *data, long long n)
 {
-	char *str;
-	int neg;
+	char	*str;
+	int		neg;
 
 	if (n < 0)
 		str = ft_itoa_long(-n);
@@ -75,16 +79,18 @@ static int		ft_int(t_data *data, long long n)
 	return (0);
 }
 
-int			pick_f_d(va_list param, t_data *data, const char *ptr)
+int				pick_f_d(va_list param, t_data *data, const char *ptr)
 {
-	long long n;
+	uintmax_t n;
 
-	if (data->length[L] == 1)
+	if (*ptr == 'D')
+		n = va_arg(param, long long int);
+	else if (data->length[L] == 1)
 		n = va_arg(param, long);
 	else if (data->length[L] == 2)
 		n = va_arg(param, long long);
 	else if (data->length[H] == 1)
-		n = (short)va_arg(param, int);
+		n = (short)va_arg(param, long long int);
 	else if (data->length[H] == 2)
 		n = (signed char)va_arg(param, int);
 	else if (*ptr == 'D' || data->length[J] == 1)

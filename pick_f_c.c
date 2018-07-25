@@ -6,36 +6,37 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:08:58 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/20 12:01:17 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/23 15:43:35 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	pick_f_c(va_list param, t_data *data)
+int	pick_f_c(va_list param, t_data *data, char ptr)
 {
 	char	result;
 
-	result = va_arg(param, int);
+	if (ptr == 'c')
+		result = va_arg(param, int);
+	else
+		result = ptr;
 	data->len = 1;
 	data->precision = 0;
 	if (data->flags[MINUS])
 	{
-		print_char(result, data);
-		f_width(data);
+		fill_buff_c(data, result);
+		return (f_width(data));
 	}
 	else if (data->flags[ZERO])
 	{
 		f_zero(data);
-		print_char(result, data);
+		return (fill_buff_c(data, result));
 	}
 	else if (data->width)
 	{
 		f_width(data);
-		print_char(result, data);
+		return (fill_buff_c(data, result));
 	}
-	else
-		print_char(result, data);
-	return (0);
+	return (fill_buff_c(data, result));
 }

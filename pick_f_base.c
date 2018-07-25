@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 12:33:50 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/20 09:41:24 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/23 11:40:21 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static char	*determine_xo_call(const char *ptr, va_list param, t_data *data)
 {
 	uintmax_t	tmp;
 
-	if (data->length[H] > 1)
+	if (*ptr == 'O')
+		tmp = va_arg(param, uintmax_t);
+	else if (data->length[H] > 1)
 		tmp = (unsigned char)va_arg(param, unsigned long);
 	else if (data->length[H] == 1)
 		tmp = (unsigned short)va_arg(param, unsigned long);

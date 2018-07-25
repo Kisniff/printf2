@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/31 12:53:50 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/23 14:59:36 by sam              ###   ########.fr       */
+/*   Created: 2018/07/23 15:59:43 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/07/23 16:34:48 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ void		init_struct(t_data *data)
 		data->length[i] = 0;
 }
 
+int			init_printf(t_data *data, const char *str)
+{
+	init_struct(data);
+	data->ret_val = 0;
+	data->idx = -1;
+	if (!ft_strcmp((char *)str, "%") && ft_strlen(str) == 1)
+		return (0);
+	return (1);
+}
+
 int			ft_printf(const char *str, ...)
 {
 	va_list	pointerlst;
@@ -53,15 +63,12 @@ int			ft_printf(const char *str, ...)
 	t_data	data;
 
 	va_start(pointerlst, str);
-	init_struct(&data);
-	data.ret_val = 0;
-	data.idx = -1;
-	if (!ft_strcmp((char *)str, "%") && ft_strlen(str) == 1)
+	if (init_printf(&data, str) == 0)
 		return (0);
 	while ((ptr = ft_strchr(str, '%')) != NULL)
 	{
 		init_struct(&data);
-		printuntil(str, ptr, &data); 
+		printuntil(str, ptr, &data);
 		ptr += 1;
 		while (ptr && (i = path(ptr, pointerlst, &data)) > 0)
 			ptr += i;
@@ -76,11 +83,14 @@ int			ft_printf(const char *str, ...)
 	va_end(pointerlst);
 	return (data.ret_val);
 }
-/*
-int main(void)
-{//modifier le parser pour erreur quand precision ou width >= 2147483640
-	ft_printf("%5p\n", 0);
-	printf("%5p\n", 0);
-	return (0);
+
+int main ()
+{
+	wchar_t hihi;
+
+	setlocale(LC_ALL, "");
+	hihi = L'é';
+	printf("Vret -> %d\n", printf("%C\n", hihi));
+	printf("Nret -> %d\n", ft_printf("%C\n", hihi));
+
 }
-*/

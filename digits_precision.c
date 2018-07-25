@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 11:55:27 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/19 13:38:30 by sklepper         ###   ########.fr       */
+/*   Updated: 2018/07/23 15:55:18 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	f_zero(t_data *data)
 	int	precision;
 
 	precision = (data->precision > 0) ? data->precision : 0;
-	zero = (int)(data->width - (data->len + precision +data->sign));
+	zero = (int)(data->width - (data->len + precision + data->sign));
 	if (zero > 0)
 		while (--zero >= 0)
 			fill_buff_c(data, '0');

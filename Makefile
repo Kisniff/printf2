@@ -6,7 +6,7 @@
 #    By: jlehideu <jlehideu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 10:23:16 by jlehideu          #+#    #+#              #
-#    Updated: 2018/07/20 11:52:40 by jlehideu         ###   ########.fr        #
+#    Updated: 2018/07/23 16:20:02 by jlehideu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ NAMEN = ft_printf
 SRC = main.c \
       to_base.c \
       string.c \
-      int.c \
       length.c \
       flags.c \
       path.c \
@@ -30,13 +29,10 @@ SRC = main.c \
       pick_f_c.c \
       ft_itoa.c \
       ft_memset.c \
-      ft_putstr.c \
       ft_strchr.c \
+	  write_str.c \
       ft_strcmp.c \
       ft_strlen.c \
-      ft_putstr_fd.c \
-      ft_putchar.c \
-      ft_putnbr.c \
       ft_strnew.c \
       ft_strdel.c \
       ft_atoi.c \
@@ -44,10 +40,10 @@ SRC = main.c \
       pick_f_w.c \
       pick_f_s.c \
       pick_f_bigs.c \
+	  toolbox.c \
       pick_f_percent.c \
       pick_f_p.c \
       pick_f_d.c \
-      toolbox.c \
       exceptions_func.c \
       ft_bzero.c
 
@@ -63,7 +59,7 @@ $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ) 
 
 yo:		$(OBJ)
-	gcc $(FLAGS) -g -o $(NAMEN) $(OBJ) 
+	gcc $(FLAGS) -fsanitize=address -g -o $(NAMEN) $(OBJ) 
 	rm -f $(OBJ)
 
 %.o: %.c

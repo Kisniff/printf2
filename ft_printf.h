@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/31 15:21:52 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/19 14:29:34 by sam              ###   ########.fr       */
+/*   Created: 2018/07/23 14:57:24 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/07/23 15:58:52 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include "libft/includes/libft.h"
 # include <unistd.h>
+# include <inttypes.h>
+# include <wchar.h>
+# include <stdlib.h>
 
 # define SHARP 0
 # define ZERO 1
@@ -47,6 +49,14 @@ typedef struct	s_data
 }				t_data;
 
 int				path(char *ptr, va_list param, t_data *data);
+int				ft_strlen(const char *str);
+char			*ft_strchr(const char *str1, int c);
+int				ft_atoi(const char *str);
+char			*ft_strdup(char *src);
+int				ft_strdel(char **str);
+void			*ft_memset(void *s, int c, size_t n);
+int				ft_putnbr(int nb);
+int				ft_strcmp(const char *str1, char *str2);
 int				conversion(const char *ptr, va_list param, t_data *data);
 int				int_param(va_list param);
 int				string_param(t_data *data, va_list param);
@@ -74,7 +84,7 @@ int				width_min(const char *ptr, t_data *data);
 char			*to_base(uintmax_t nb, char *base);
 int				pick_f_u(va_list param, t_data *data);
 int				pick_f_base(va_list param, t_data *data, const char *ptr);
-int				pick_f_c(va_list param, t_data *data);
+int				pick_f_c(va_list param, t_data *data, char ptr);
 int				pick_f_w(t_data *data, va_list param);
 int				pick_f_percent(va_list param, t_data *data);
 int				pick_f_bigs(va_list param, t_data *data);

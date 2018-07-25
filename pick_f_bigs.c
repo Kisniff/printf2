@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 12:02:47 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/17 13:50:41 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/23 12:14:54 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,8 @@ int				pick_f_bigs(va_list param, t_data *data)
 	wchar_t *str;
 	int		i;
 
-	str = va_arg(param, wchar_t *);
 	i = -1;
-	if (!str)
+	if (!(str = va_arg(param, wchar_t *)))
 		return (exception_bigs(data, "(null)"));
 	while (str[++i])
 		determine_w_len(data, str[i]);

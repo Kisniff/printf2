@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   toolbox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sklepper <sklepperstudent.42.fr>           +#+  +:+       +#+        */
+/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/14 17:13:31 by sklepper          #+#    #+#             */
-/*   Updated: 2018/07/19 16:14:50 by sam              ###   ########.fr       */
+/*   Created: 2018/07/23 15:22:28 by jlehideu          #+#    #+#             */
+/*   Updated: 2018/07/23 15:32:53 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int								ft_isneg(long long n)
+int							ft_isneg(long long n)
 {
 	return (n < 0 ? 1 : 0);
 }
 
-static size_t					ft_count_nbr(long long n)
+static size_t				ft_count_nbr(long long n)
 {
-	size_t	i;
+	size_t				i;
 
 	i = 0;
 	while (n != 0)
@@ -30,9 +30,9 @@ static size_t					ft_count_nbr(long long n)
 	return (i);
 }
 
-static unsigned long long		ft_nbchar(size_t i, long long nbr)
+static unsigned long long	ft_nbchar(size_t i, long long nbr)
 {
-	long long		base;
+	long long			base;
 	unsigned long long	n;
 
 	base = 10;
@@ -51,11 +51,11 @@ static unsigned long long		ft_nbchar(size_t i, long long nbr)
 	return (n);
 }
 
-char							*ft_itoa_long(long long n)
+char						*ft_itoa_long(long long n)
 {
-	size_t	size;
-	char	*str;
-	int		i;
+	size_t					size;
+	char					*str;
+	int						i;
 	unsigned long long		nbr;
 
 	i = -1;

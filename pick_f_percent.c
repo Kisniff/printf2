@@ -6,7 +6,7 @@
 /*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:09:15 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/16 18:36:48 by jlehideu         ###   ########.fr       */
+/*   Updated: 2018/07/23 13:07:36 by jlehideu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 int	pick_f_percent(va_list param, t_data *data)
 {
-	unsigned int	nb;
-
-	nb = va_arg(param, unsigned int);
 	data->len = 1;
 	data->precision = 0;
 	if (data->flags[MINUS])
