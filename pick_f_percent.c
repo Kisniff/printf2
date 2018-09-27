@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pick_f_percent.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/09 16:09:15 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/23 13:07:36 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/09 16:09:15 by sklepper          #+#    #+#             */
+/*   Updated: 2018/09/27 10:33:22 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	pick_f_percent(va_list param, t_data *data)
+int	pick_f_percent(t_data *data)
 {
 	data->len = 1;
 	data->precision = 0;

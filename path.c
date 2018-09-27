@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 16:05:48 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/23 16:05:50 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/23 16:05:48 by sklepper          #+#    #+#             */
+/*   Updated: 2018/09/27 10:34:05 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		flags(const char *ptr, t_data *data)
 	if (*ptr == '#')
 		return (flag_sharp(data));
 	else if (*ptr == '0')
-		return (flag_zero(data, ptr));
+		return (flag_zero(data));
 	else if (*ptr == '-')
 		return (flag_minus(data));
 	else if (*ptr == '+')
@@ -91,6 +91,6 @@ int		conversion(const char *ptr, va_list param, t_data *data)
 	else if (*ptr == 'c')
 		return (pick_f_c(param, data, *ptr));
 	else if (*ptr == '%')
-		return (pick_f_percent(param, data));
+		return (pick_f_percent(data));
 	return (pick_f_c(param, data, *ptr));
 }

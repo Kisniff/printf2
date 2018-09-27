@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlehideu <jlehideu@student.42.fr>          +#+  +:+       +#+         #
+#    By: sklepper <sklepper@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/04/18 10:23:16 by jlehideu          #+#    #+#              #
-#    Updated: 2018/07/23 16:20:02 by jlehideu         ###   ########.fr        #
+#    Created: 2018/04/18 10:23:16 by sklepper          #+#    #+#              #
+#    Updated: 2018/09/27 15:14:52 by sklepper         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

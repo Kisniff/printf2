@@ -1,2 +1,0 @@
-- modifier le parser pour renvoyer une ereur quand precision ou width >= 2147438640
-- revoir le parser d'erreur pour imprimer jusqu'à la dernier condition valable

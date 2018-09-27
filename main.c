@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 15:59:43 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/23 16:34:48 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/23 15:59:43 by sklepper          #+#    #+#             */
+/*   Updated: 2018/09/27 15:17:53 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,21 @@ int			init_printf(t_data *data, const char *str)
 	return (1);
 }
 
+char		*f_while(t_data *data, const char *str, char *ptr, va_list ptr_lst)
+{
+	int i;
+
+	init_struct(data);
+	printuntil(str, ptr, data);
+	ptr += 1;
+	while (ptr && (i = path(ptr, ptr_lst, data)) > 0)
+		ptr += i;
+	if (data->ret_val > 0)
+		write(1, &data->buff, ++data->idx);
+	data->idx = -1;
+	return (ptr);
+}
+
 int			ft_printf(const char *str, ...)
 {
 	va_list	pointerlst;
@@ -62,35 +77,21 @@ int			ft_printf(const char *str, ...)
 	int		i;
 	t_data	data;
 
+	if (!str)
+		return (0);
 	va_start(pointerlst, str);
 	if (init_printf(&data, str) == 0)
 		return (0);
 	while ((ptr = ft_strchr(str, '%')) != NULL)
 	{
-		init_struct(&data);
-		printuntil(str, ptr, &data);
-		ptr += 1;
-		while (ptr && (i = path(ptr, pointerlst, &data)) > 0)
-			ptr += i;
-		str = ptr + 1;
-		if (data.ret_val > 0)
-			write(1, &data.buff, ++data.idx);
-		data.idx = -1;
+		ptr = f_while(&data, str, ptr, pointerlst);
+		if (*ptr)
+			ptr += 1;
+		str = ptr;
 	}
 	printuntil(str, ptr, &data);
 	if (data.ret_val > -1)
 		write(1, &data.buff, ++data.idx);
 	va_end(pointerlst);
 	return (data.ret_val);
-}
-
-int main ()
-{
-	wchar_t hihi;
-
-	setlocale(LC_ALL, "");
-	hihi = L'é';
-	printf("Vret -> %d\n", printf("%C\n", hihi));
-	printf("Nret -> %d\n", ft_printf("%C\n", hihi));
-
 }

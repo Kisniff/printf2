@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pick_f_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 14:54:03 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/23 16:06:33 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/23 14:54:03 by sklepper          #+#    #+#             */
+/*   Updated: 2018/09/27 13:46:58 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		flags_d(t_data *data, int neg, char *str, long long n)
 	data->precision = (data->precision > (int)data->len) ?
 		(int)(data->precision - data->len) : 0;
 	if (data->flags[MINUS] == 0 && (data->flags[ZERO] == 0 ||
-				data->precision != 0))
+				tmp != 0))
 		f_width(data);
 	else if (data->flags[ZERO] == 1 && data->flags[MINUS] == 0 &&
 			data->precision == 0)
@@ -89,14 +89,14 @@ int				pick_f_d(va_list param, t_data *data, const char *ptr)
 		n = va_arg(param, long);
 	else if (data->length[L] == 2)
 		n = va_arg(param, long long);
+	else if (data->length[Z] == 1)
+		n = va_arg(param, size_t);
+	else if (*ptr == 'D' || data->length[J] == 1)
+		n = va_arg(param, intmax_t);
 	else if (data->length[H] == 1)
 		n = (short)va_arg(param, long long int);
 	else if (data->length[H] == 2)
 		n = (signed char)va_arg(param, int);
-	else if (*ptr == 'D' || data->length[J] == 1)
-		n = va_arg(param, intmax_t);
-	else if (data->length[Z] == 1)
-		n = va_arg(param, size_t);
 	else
 		n = va_arg(param, int);
 	ft_int(data, n);

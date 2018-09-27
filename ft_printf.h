@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 14:57:24 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/23 15:58:52 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/23 14:57:24 by sklepper          #+#    #+#             */
+/*   Updated: 2018/09/27 10:33:22 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int				unsignedint_param_hex(const char *ptr, va_list param);
 int				unsignedint_param_hexc(const char *ptr, va_list param);
 int				flags(const char *ptr, t_data *data);
 int				flag_sharp(t_data *data);
-int				flag_zero(t_data *data, const char *ptr);
+int				flag_zero(t_data *data);
 int				flag_minus(t_data *data);
 int				flag_plus(t_data *data);
 int				flag_space(t_data *data);
@@ -86,7 +86,7 @@ int				pick_f_u(va_list param, t_data *data);
 int				pick_f_base(va_list param, t_data *data, const char *ptr);
 int				pick_f_c(va_list param, t_data *data, char ptr);
 int				pick_f_w(t_data *data, va_list param);
-int				pick_f_percent(va_list param, t_data *data);
+int				pick_f_percent(t_data *data);
 int				pick_f_bigs(va_list param, t_data *data);
 int				pick_f_s(va_list param, t_data *data);
 int				pick_f_d(va_list param, t_data *data, const char *ptr);

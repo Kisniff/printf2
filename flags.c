@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlehideu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sklepper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 15:55:26 by jlehideu          #+#    #+#             */
-/*   Updated: 2018/07/23 15:55:30 by jlehideu         ###   ########.fr       */
+/*   Created: 2018/07/23 15:55:26 by sklepper          #+#    #+#             */
+/*   Updated: 2018/09/27 13:31:44 by sklepper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ int		flag_sharp(t_data *data)
 	return (1);
 }
 
-int		flag_zero(t_data *data, const char *ptr)
+int		flag_zero(t_data *data)
 {
 	data->flags[ZERO] = 1;
-	data->width = ft_atoi((char *)ptr);
 	return (1);
 }
 
